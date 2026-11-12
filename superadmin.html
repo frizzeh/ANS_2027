@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.superadmin">Super admin – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand__logo">ANS</span>
+      ANS 2027
+    </a>
+
+    <nav class="site-nav" aria-label="Hlavné menu">
+      <ul>
+        <li><a href="index.html#program" data-i18n="nav.program">Program</a></li>
+        <li><a href="index.html#speakers" data-i18n="nav.speakers">Rečníci</a></li>
+        <li><a href="index.html#fees" data-i18n="nav.fees">Poplatky</a></li>
+        <li><a href="index.html#venue" data-i18n="nav.venue">Miesto a ubytovanie</a></li>
+      </ul>
+    </nav>
+
+    <ul class="lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <p class="auth">
+      <a class="button button--light" href="prihlasenie.html" data-auth="guest" data-i18n="btn.login">Prihlásiť sa</a>
+      <a class="button button--light" href="admin.html" data-auth="admin" data-i18n="nav.admin" hidden>Admin</a>
+      <a class="button button--light" href="superadmin.html" data-auth="superadmin" data-i18n="nav.superadmin" hidden>Super admin</a>
+      <a class="button button--light" href="ucet.html" data-auth="participant" data-i18n="btn.account" hidden>Môj účet</a>
+      <button class="link-button" type="button" data-auth="user" data-logout data-i18n="btn.logout" hidden>Odhlásiť sa</button>
+    </p>
+  </header>
+
+  <main class="page admin" id="super-main" hidden>
+
+    <header class="page__head">
+      <p class="eyebrow" data-i18n="sup.label">Super administrácia</p>
+      <h1 class="page__title" data-i18n="sup.title">Super admin</h1>
+    </header>
+
+    <p class="alert" id="error" hidden></p>
+    <p class="notice" id="notice" data-i18n="adm.saved" hidden>Uložené.</p>
+
+    <!-- Administrátori -->
+    <section class="card table-card" aria-labelledby="admins-title">
+      <header class="table-card__head">
+        <h2 id="admins-title" data-i18n="sup.admins.title">Administrátori</h2>
+      </header>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" data-i18n="adm.col.name">Meno</th>
+            <th scope="col" data-i18n="f.email">E-mail</th>
+            <th scope="col" data-i18n="adm.col.status">Stav</th>
+            <th scope="col" data-i18n="adm.col.action">Akcia</th>
+          </tr>
+        </thead>
+        <tbody id="admins-body"></tbody>
+      </table>
+      <form class="inline-form" id="admin-form">
+        <label class="field">
+          <span data-i18n="f.firstname">Meno</span>
+          <input type="text" name="firstName" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.lastname">Priezvisko</span>
+          <input type="text" name="lastName" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.email">E-mail</span>
+          <input type="email" name="email" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.password">Heslo (aspoň 8 znakov)</span>
+          <input type="password" name="password" minlength="8" required>
+        </label>
+        <button class="button" type="submit" data-i18n="sup.create">Vytvoriť administrátora</button>
+      </form>
+    </section>
+
+    <!-- Nastavenia konferencie -->
+    <section class="card" aria-labelledby="conference-title">
+      <h2 class="card__title" id="conference-title" data-i18n="sup.conf.title">Nastavenia konferencie</h2>
+      <form class="form--stack" id="conference-form">
+        <fieldset class="group">
+          <legend data-i18n="sup.conf.title">Nastavenia konferencie</legend>
+          <label class="field">
+            <span data-i18n="sup.conf.name">Názov</span>
+            <input type="text" name="name" required>
+          </label>
+          <label class="field">
+            <span data-i18n="sup.conf.location">Miesto</span>
+            <input type="text" name="location">
+          </label>
+          <label class="field">
+            <span data-i18n="sup.conf.start">Začiatok</span>
+            <input type="date" name="start_date">
+          </label>
+          <label class="field">
+            <span data-i18n="sup.conf.end">Koniec</span>
+            <input type="date" name="end_date">
+          </label>
+          <label class="field field--full">
+            <span data-i18n="sup.conf.iban">IBAN pre platby</span>
+            <input type="text" name="iban">
+          </label>
+          <label class="field field--full">
+            <span data-i18n="sup.conf.accom">Informácie o ubytovaní</span>
+            <textarea name="accommodation_info"></textarea>
+          </label>
+          <label class="consent field--full">
+            <input type="checkbox" name="program_published">
+            <span data-i18n="sup.conf.published">Program je zverejnený</span>
+          </label>
+        </fieldset>
+        <p class="form__actions">
+          <button class="button" type="submit" data-i18n="sup.save">Uložiť</button>
+        </p>
+      </form>
+    </section>
+
+    <!-- Kategórie a poplatky -->
+    <section class="card table-card" aria-labelledby="categories-title">
+      <header class="table-card__head">
+        <h2 id="categories-title" data-i18n="sup.cat.title">Kategórie a poplatky</h2>
+      </header>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" data-i18n="adm.col.category">Kategória</th>
+            <th scope="col" data-i18n="sup.cat.fee">Poplatok (€)</th>
+            <th scope="col" data-i18n="sup.cat.student">Študentský poplatok (€)</th>
+            <th scope="col" data-i18n="adm.col.action">Akcia</th>
+          </tr>
+        </thead>
+        <tbody id="categories-body"></tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer.org">Fakulta prírodných vied UCM v Trnave a Fakulta prírodných vied UMB v Banskej Bystrici</p>
+    <p data-i18n="footer.contact">Kontakt: [doplniť e-mail]</p>
+    <p>&copy; 2026 ANS</p>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/superadmin.js"></script>
+</body>
+</html>

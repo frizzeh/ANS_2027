@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.account">Môj účet – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand__logo">ANS</span>
+      ANS 2027
+    </a>
+
+    <nav class="site-nav" aria-label="Hlavné menu">
+      <ul>
+        <li><a href="index.html#program" data-i18n="nav.program">Program</a></li>
+        <li><a href="index.html#speakers" data-i18n="nav.speakers">Rečníci</a></li>
+        <li><a href="index.html#fees" data-i18n="nav.fees">Poplatky</a></li>
+        <li><a href="index.html#venue" data-i18n="nav.venue">Miesto a ubytovanie</a></li>
+      </ul>
+    </nav>
+
+    <ul class="lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <p class="auth">
+      <a class="button button--light" href="prihlasenie.html" data-auth="guest" data-i18n="btn.login">Prihlásiť sa</a>
+      <a class="button button--light" href="admin.html" data-auth="admin" data-i18n="nav.admin" hidden>Admin</a>
+      <a class="button button--light" href="superadmin.html" data-auth="superadmin" data-i18n="nav.superadmin" hidden>Super admin</a>
+      <a class="button button--light" href="ucet.html" data-auth="participant" data-i18n="btn.account" hidden>Môj účet</a>
+      <button class="link-button" type="button" data-auth="user" data-logout data-i18n="btn.logout" hidden>Odhlásiť sa</button>
+    </p>
+  </header>
+
+  <main class="page">
+
+    <header class="page__head">
+      <p class="eyebrow" data-i18n="acc.label">Môj účet</p>
+      <h1 class="page__title">
+        <span data-i18n="acc.hello">Dobrý deň,</span>
+        <span id="user-name"></span>
+      </h1>
+      <p class="muted">
+        <span data-i18n="acc.cat">Kategória</span>:
+        <strong id="user-category"></strong>
+      </p>
+    </header>
+
+    <section class="columns">
+
+      <article class="card">
+        <h2 class="eyebrow" data-i18n="pay.title">Platba</h2>
+        <p><span class="badge" id="pay-status"></span></p>
+        <dl class="details">
+          <dt data-i18n="pay.amount">Suma</dt>
+          <dd id="pay-amount"></dd>
+          <dt data-i18n="pay.iban">IBAN</dt>
+          <dd id="pay-iban"></dd>
+          <dt data-i18n="pay.vs">Variabilný symbol</dt>
+          <dd id="pay-symbol"></dd>
+          <dt data-i18n="pay.due">Splatnosť</dt>
+          <dd id="pay-due"></dd>
+        </dl>
+        <p class="muted" data-i18n="pay.note">
+          Platobné inštrukcie dostanete aj e-mailom. Platbu potvrdzuje organizátor ručne.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2 class="eyebrow" data-i18n="dates.title">Dôležité termíny</h2>
+        <dl class="details">
+          <dt data-i18n="dates.abstract">Uzávierka abstraktov</dt>
+          <dd data-i18n="tba">[doplniť]</dd>
+          <dt data-i18n="dates.payment">Uzávierka registrácie a platby</dt>
+          <dd data-i18n="tba">[doplniť]</dd>
+          <dt data-i18n="dates.conf">Konferencia</dt>
+          <dd data-i18n="tba">[doplniť]</dd>
+        </dl>
+      </article>
+
+    </section>
+
+    <article class="card paper">
+      <h2 class="eyebrow" data-i18n="paper.title">Môj príspevok</h2>
+
+      <p class="muted" id="paper-none" data-i18n="paper.none">Pasívni účastníci príspevok nepodávajú.</p>
+
+      <section id="paper-info" hidden>
+        <h3 class="paper__title" id="paper-title"></h3>
+        <p class="paper__meta">
+          <span id="paper-type"></span>
+          <span class="badge" id="paper-status"></span>
+        </p>
+        <p class="muted" id="paper-file"></p>
+        <a class="button" href="prispevok.html" id="paper-button"></a>
+      </section>
+    </article>
+
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer.org">Fakulta prírodných vied UCM v Trnave a Fakulta prírodných vied UMB v Banskej Bystrici</p>
+    <p data-i18n="footer.contact">Kontakt: [doplniť e-mail]</p>
+    <p>&copy; 2026 ANS</p>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/account.js"></script>
+</body>
+</html>

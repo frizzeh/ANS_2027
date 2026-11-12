@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.login">Prihlásenie – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand__logo">ANS</span>
+      ANS 2027
+    </a>
+
+    <nav class="site-nav" aria-label="Hlavné menu">
+      <ul>
+        <li><a href="index.html#program" data-i18n="nav.program">Program</a></li>
+        <li><a href="index.html#speakers" data-i18n="nav.speakers">Rečníci</a></li>
+        <li><a href="index.html#fees" data-i18n="nav.fees">Poplatky</a></li>
+        <li><a href="index.html#venue" data-i18n="nav.venue">Miesto a ubytovanie</a></li>
+      </ul>
+    </nav>
+
+    <ul class="lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <p class="auth">
+      <a class="button button--light" href="prihlasenie.html" data-auth="guest" data-i18n="btn.login">Prihlásiť sa</a>
+      <a class="button button--light" href="admin.html" data-auth="admin" data-i18n="nav.admin" hidden>Admin</a>
+      <a class="button button--light" href="superadmin.html" data-auth="superadmin" data-i18n="nav.superadmin" hidden>Super admin</a>
+      <a class="button button--light" href="ucet.html" data-auth="participant" data-i18n="btn.account" hidden>Môj účet</a>
+      <button class="link-button" type="button" data-auth="user" data-logout data-i18n="btn.logout" hidden>Odhlásiť sa</button>
+    </p>
+  </header>
+
+  <main class="page page--narrow">
+
+    <header class="page__head">
+      <h1 class="page__title" data-i18n="login.title">Prihlásenie</h1>
+      <p class="muted" data-i18n="login.lead">Zadajte e-mail a heslo, ktoré ste použili pri registrácii.</p>
+    </header>
+
+    <form class="form--stack card" id="login-form">
+      <label class="field">
+        <span data-i18n="f.email">E-mail</span>
+        <input type="email" name="email" required>
+      </label>
+      <label class="field">
+        <span data-i18n="f.password">Heslo</span>
+        <input type="password" name="password" required>
+      </label>
+
+      <p class="alert" id="login-error" data-i18n="login.error" hidden>Nesprávny e-mail alebo heslo.</p>
+
+      <p class="form__actions">
+        <button class="button" type="submit" data-i18n="login.submit">Prihlásiť sa</button>
+      </p>
+      <p class="muted">
+        <span data-i18n="login.no">Ešte nemáte účet?</span>
+        <a href="registracia.html" data-i18n="btn.register">Registrovať sa</a>
+      </p>
+    </form>
+
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer.org">Fakulta prírodných vied UCM v Trnave a Fakulta prírodných vied UMB v Banskej Bystrici</p>
+    <p data-i18n="footer.contact">Kontakt: [doplniť e-mail]</p>
+    <p>&copy; 2026 ANS</p>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

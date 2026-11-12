@@ -1,0 +1,935 @@
+/* ==========================================================================
+   ANS 2027 – štýly webu
+
+   1.  Premenné
+   2.  Základ
+   3.  Pomocné triedy
+   4.  Tlačidlá
+   5.  Hlavička a menu
+   6.  Úvodná časť (hero)
+   7.  Sekcie a karty
+   8.  Formuláre
+   9.  Účet účastníka
+   10. Pätička
+   11. Responzivita
+   ========================================================================== */
+
+
+/* 1. Premenné
+   -------------------------------------------------------------------------- */
+:root {
+  /* Farby */
+  --navy:       #0b1230;
+  --navy-soft:  #1c2656;
+  --ink:        #0f172a;
+  --muted:      #55627a;
+  --page:       #f4f6fc;
+  --card:       #ffffff;
+  --line:       #dfe4f1;
+  --accent:     #4f46e5;
+  --accent-bg:  #eef0ff;
+  --cyan:       #06b6d4;
+
+  /* Rozmery */
+  --radius:  1.25rem;
+  --shadow:  0 12px 30px rgba(15, 23, 42, 0.10);
+
+  /* Bočné odsadenie: obsah má max. šírku 70 rem a je vycentrovaný */
+  --gutter: max(1.5rem, calc((100% - 70rem) / 2));
+}
+
+
+/* 2. Základ
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--page);
+}
+
+h1, h2, h3, p, dl, dd, ul, ol {
+  margin: 0;
+}
+
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+
+/* 3. Pomocné triedy
+   -------------------------------------------------------------------------- */
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+
+/* 4. Tlačidlá
+   -------------------------------------------------------------------------- */
+.button {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  background: var(--accent);
+  transition: filter 0.2s;
+}
+
+.button:hover {
+  filter: brightness(1.1);
+}
+
+.button--cyan {
+  color: var(--navy);
+  background: var(--cyan);
+}
+
+.button--outline {
+  background: none;
+  border-color: #818cf8;
+}
+
+.button--light {
+  padding: 0.5rem 1.2rem;
+  color: var(--navy);
+  background: #fff;
+}
+
+.button--ghost {
+  color: var(--navy);
+  background: #fff;
+  border-color: #c9d2e3;
+}
+
+.link-button {
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: #c7d2fe;
+  background: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+/* 5. Hlavička a menu
+   -------------------------------------------------------------------------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding: 1rem var(--gutter);
+  color: #fff;
+  background: var(--navy);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: auto;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+}
+
+.brand__logo {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--navy);
+  background: var(--cyan);
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+.site-nav a {
+  font-weight: 600;
+  color: #c7d2fe;
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: #fff;
+}
+
+/* Prepínač jazyka SK | EN */
+.lang {
+  display: flex;
+  overflow: hidden;
+  border: 1px solid #3b4684;
+  border-radius: 999px;
+}
+
+.lang button {
+  padding: 0.35rem 0.9rem;
+  border: 0;
+  font: inherit;
+  font-weight: 700;
+  color: #c7d2fe;
+  background: none;
+  cursor: pointer;
+}
+
+.lang button[aria-pressed="true"] {
+  color: var(--navy);
+  background: #fff;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+/* 6. Úvodná časť (hero)
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(18rem, 2fr);
+  column-gap: 3rem;
+  align-content: center;
+  padding: 4rem var(--gutter) 6.5rem;
+  overflow: hidden;
+  color: #fff;
+  background: var(--navy);
+}
+
+/* Dekoratívne kruhy v pozadí */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.hero::before {
+  top: -10rem;
+  right: -9rem;
+  width: 32rem;
+  height: 32rem;
+  background: #2a2790;
+}
+
+.hero::after {
+  top: 16rem;
+  right: 8rem;
+  width: 7rem;
+  height: 7rem;
+  background: var(--cyan);
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+  grid-column: 1;
+}
+
+.hero .eyebrow {
+  color: #67e8f9;
+}
+
+.hero__title {
+  margin: 0.8rem 0 0.5rem;
+  font-size: clamp(3.2rem, 9vw, 5.2rem);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.hero__subtitle {
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  font-weight: 600;
+  color: #a5b4fc;
+}
+
+.hero__lead {
+  max-width: 34rem;
+  margin: 1.25rem 0 1.5rem;
+  font-size: 1.15rem;
+  color: #c7d2fe;
+}
+
+.hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+}
+
+.hero__facts li {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #e0e7ff;
+  background: var(--navy-soft);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* Karta s termínmi vpravo */
+.hero__dates {
+  grid-column: 2;
+  grid-row: 1 / span 6;
+  align-self: center;
+  padding: 1.75rem;
+  border-radius: var(--radius);
+  color: var(--ink);
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.hero__dates .eyebrow {
+  margin-bottom: 0.5rem;
+  color: var(--accent);
+}
+
+.hero__dates dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.hero__dates dt,
+.hero__dates dd {
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.hero__dates dd {
+  font-weight: 700;
+}
+
+
+/* 7. Sekcie a karty
+   -------------------------------------------------------------------------- */
+.section {
+  padding: 5rem var(--gutter) 0;
+}
+
+.section__head {
+  margin-bottom: 2rem;
+}
+
+.section__title {
+  margin: 0.4rem 0 0.6rem;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.section__lead {
+  max-width: 40rem;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+/* Mriežka kariet */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  padding: 1.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.card h3 {
+  margin: 0.3rem 0;
+  font-size: 1.35rem;
+}
+
+/* Rýchle odkazy tesne pod úvodnou časťou */
+.quick {
+  position: relative;
+  z-index: 2;
+  margin-top: -3.25rem;
+  padding: 0 var(--gutter);
+}
+
+.quick a.card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+.quick a.card:hover {
+  transform: translateY(-4px);
+}
+
+/* Štyri kroky */
+.step__number {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.9rem;
+  border-radius: 50%;
+  font-weight: 800;
+  color: #fff;
+  background: var(--accent);
+}
+
+.step h3 {
+  margin-bottom: 0.3rem;
+  font-size: 1.25rem;
+}
+
+/* Poplatky */
+.price {
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+/* Program: dvojice čas | názov bodu */
+.timeline {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  padding-block: 0.5rem;
+}
+
+.timeline dt,
+.timeline dd {
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.timeline dt:first-of-type,
+.timeline dt:first-of-type + dd {
+  border-top: 0;
+}
+
+.timeline dt {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Rečníci */
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+}
+
+/* Miesto a ubytovanie (tmavý pruh) */
+.venue {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 2rem;
+  align-items: center;
+  margin: 5rem var(--gutter) 0;
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  color: #fff;
+  background: var(--navy);
+}
+
+.venue > * {
+  grid-column: 1;
+}
+
+.venue .eyebrow {
+  color: #67e8f9;
+}
+
+.venue p:not(.eyebrow) {
+  color: #c7d2fe;
+}
+
+.venue .button {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+}
+
+
+/* 8. Formuláre
+   -------------------------------------------------------------------------- */
+.page {
+  padding: 3rem var(--gutter) 5rem;
+}
+
+.page--narrow {
+  --gutter: 1.5rem;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.page__head {
+  margin-bottom: 2rem;
+}
+
+.page__title {
+  margin: 0.4rem 0;
+  font-size: clamp(1.9rem, 5vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Formulár s postranným súhrnom */
+.form--split {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr);
+  gap: 1.25rem 1.5rem;
+  align-items: start;
+}
+
+.form--split > * {
+  grid-column: 1;
+}
+
+.form--split > .summary {
+  grid-column: 2;
+  grid-row: 1 / span 7;
+  position: sticky;
+  top: 1rem;
+}
+
+.form--stack {
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* Skupina polí (každá fieldset je jedna karta) */
+.group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.group legend {
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
+.field__hint {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #c9d2e3;
+  border-radius: 0.65rem;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+}
+
+textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+/* Voľba kategórie / typu príspevku */
+.option {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem;
+  border: 2px solid var(--line);
+  border-radius: 0.9rem;
+  cursor: pointer;
+}
+
+.option:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option__title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.option__text {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.option__fee {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* Súhlas s GDPR */
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-weight: 400;
+}
+
+.consent input {
+  flex: none;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: 0.15rem;
+}
+
+.form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 0.65rem;
+  font-weight: 600;
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+/* Súhrn registrácie */
+.summary h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.summary h3 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1rem;
+}
+
+.summary__value {
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+
+/* 9. Účet účastníka
+   -------------------------------------------------------------------------- */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.details dt {
+  color: var(--muted);
+}
+
+.details dd {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.badge--ok {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.paper__title {
+  margin: 0.4rem 0;
+  font-size: 1.4rem;
+}
+
+.paper__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.paper .button {
+  margin-top: 1rem;
+}
+
+
+/* 10. Pätička
+   -------------------------------------------------------------------------- */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  margin-top: 4rem;
+  padding: 1.75rem var(--gutter);
+  font-size: 0.95rem;
+  color: #c7d2fe;
+  background: var(--navy);
+}
+
+
+/* 11. Responzivita
+   -------------------------------------------------------------------------- */
+@media (max-width: 50rem) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__dates {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 2rem;
+  }
+
+  .hero::before,
+  .hero::after {
+    opacity: 0.35;
+  }
+
+  .form--split {
+    grid-template-columns: 1fr;
+  }
+
+  .form--split > .summary {
+    grid-column: 1;
+    grid-row: auto;
+    position: static;
+  }
+
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline dt {
+    padding-bottom: 0;
+  }
+
+  .timeline dd {
+    padding-top: 0.2rem;
+    border-top: 0;
+  }
+
+  .venue {
+    grid-template-columns: 1fr;
+    padding: 1.75rem;
+  }
+
+  .venue .button {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+    margin-top: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* 12. Admin panel a super admin
+   -------------------------------------------------------------------------- */
+.admin > * + * {
+  margin-top: 1.5rem;
+}
+
+.stats {
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+}
+
+.stat__value {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+/* Karta s tabuľkou */
+.table-card {
+  padding: 0;
+  overflow-x: auto;
+}
+
+.table-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.table-card__head h2,
+.card__title {
+  font-size: 1.25rem;
+}
+
+.card__title {
+  margin-bottom: 1rem;
+}
+
+.table-card__empty {
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 1.5rem;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table th {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--accent-bg);
+}
+
+.table tbody tr:hover {
+  background: #fafbff;
+}
+
+.table select,
+.table input {
+  width: auto;
+  min-width: 7rem;
+  padding: 0.4rem 0.6rem;
+}
+
+.button--small {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+/* Formulár pod tabuľkou */
+.inline-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+  align-items: end;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.plain-list {
+  padding: 0 1.5rem 1rem;
+  list-style: disc inside;
+}
+
+.notice {
+  padding: 0.75rem 1rem;
+  border-radius: 0.65rem;
+  font-weight: 600;
+  color: #166534;
+  background: #dcfce7;
+}

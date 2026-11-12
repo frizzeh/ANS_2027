@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.register">Registrácia – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand__logo">ANS</span>
+      ANS 2027
+    </a>
+
+    <nav class="site-nav" aria-label="Hlavné menu">
+      <ul>
+        <li><a href="index.html#program" data-i18n="nav.program">Program</a></li>
+        <li><a href="index.html#speakers" data-i18n="nav.speakers">Rečníci</a></li>
+        <li><a href="index.html#fees" data-i18n="nav.fees">Poplatky</a></li>
+        <li><a href="index.html#venue" data-i18n="nav.venue">Miesto a ubytovanie</a></li>
+      </ul>
+    </nav>
+
+    <ul class="lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <p class="auth">
+      <a class="button button--light" href="prihlasenie.html" data-auth="guest" data-i18n="btn.login">Prihlásiť sa</a>
+      <a class="button button--light" href="admin.html" data-auth="admin" data-i18n="nav.admin" hidden>Admin</a>
+      <a class="button button--light" href="superadmin.html" data-auth="superadmin" data-i18n="nav.superadmin" hidden>Super admin</a>
+      <a class="button button--light" href="ucet.html" data-auth="participant" data-i18n="btn.account" hidden>Môj účet</a>
+      <button class="link-button" type="button" data-auth="user" data-logout data-i18n="btn.logout" hidden>Odhlásiť sa</button>
+    </p>
+  </header>
+
+  <main class="page">
+
+    <header class="page__head">
+      <p class="eyebrow" data-i18n="btn.register">Registrovať sa</p>
+      <h1 class="page__title" data-i18n="reg.title">Registrácia na ANS 2027</h1>
+      <p class="muted" data-i18n="reg.lead">Vyplnenie trvá asi 3 minúty. Po odoslaní vám pošleme platobné inštrukcie.</p>
+    </header>
+
+    <form class="form--split" id="register-form">
+
+      <fieldset class="group">
+        <legend data-i18n="reg.s.person">Osobné údaje</legend>
+        <label class="field">
+          <span data-i18n="f.titlebefore">Titul pred menom</span>
+          <input type="text" name="titleBefore">
+        </label>
+        <label class="field">
+          <span data-i18n="f.titleafter">Titul za menom</span>
+          <input type="text" name="titleAfter">
+        </label>
+        <label class="field">
+          <span data-i18n="f.firstname">Meno</span>
+          <input type="text" name="firstName" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.lastname">Priezvisko</span>
+          <input type="text" name="lastName" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.email">E-mail</span>
+          <input type="email" name="email" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.password">Heslo (aspoň 8 znakov)</span>
+          <input type="password" name="password" minlength="8" required>
+        </label>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend data-i18n="reg.s.work">Pracovisko</legend>
+        <label class="field">
+          <span data-i18n="f.org">Organizácia alebo inštitúcia</span>
+          <input type="text" name="organization" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.dept">Pracovisko alebo oddelenie</span>
+          <input type="text" name="department" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.country">Krajina</span>
+          <input type="text" name="country" required>
+        </label>
+      </fieldset>
+
+      <fieldset class="group" id="category-group">
+        <legend data-i18n="reg.s.category">Kategória účasti</legend>
+
+        <!-- Voľby kategórií doplní skript podľa údajov z API (poplatky sú z databázy) -->
+        <template id="category-template">
+          <label class="option">
+            <input type="radio" name="category" required>
+            <span class="option__title"></span>
+            <span class="option__text"></span>
+            <span class="option__fee"></span>
+          </label>
+        </template>
+
+        <label class="consent field--full" id="student-label">
+          <input type="checkbox" name="isStudent">
+          <span data-i18n="reg.student">Som študent alebo doktorand (znížený poplatok)</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="group" id="paper-group">
+        <legend data-i18n="reg.s.paper">Váš príspevok</legend>
+        <label class="field field--full">
+          <span data-i18n="f.papertitle">Názov príspevku</span>
+          <input type="text" name="paperTitle" id="paper-title" required>
+        </label>
+        <p class="field__hint field--full" data-i18n="reg.paper.hint">Typ príspevku sa nastaví podľa kategórie.</p>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend data-i18n="reg.s.billing">Fakturačné údaje a strava</legend>
+        <label class="field field--full">
+          <span data-i18n="f.billing.name">Názov platiteľa</span>
+          <input type="text" name="billingName" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.street">Ulica a číslo</span>
+          <input type="text" name="billingStreet" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.city">Mesto</span>
+          <input type="text" name="billingCity" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.zip">PSČ</span>
+          <input type="text" name="billingZip" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.country">Krajina platiteľa</span>
+          <input type="text" name="billingCountry" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.ico">IČO (nepovinné)</span>
+          <input type="text" name="billingIco">
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.dic">DIČ (nepovinné)</span>
+          <input type="text" name="billingDic">
+        </label>
+        <label class="field field--full">
+          <span data-i18n="f.diet">Stravovacie požiadavky (nepovinné)</span>
+          <textarea name="diet"></textarea>
+          <span class="field__hint" data-i18n="f.diet.hint">Napríklad alergie a intolerancie na slávnostnej večeri.</span>
+        </label>
+      </fieldset>
+
+      <label class="consent card">
+        <input type="checkbox" name="gdpr" required>
+        <span data-i18n="reg.gdpr">Oboznámil(a) som sa s informáciami o spracúvaní osobných údajov.</span>
+      </label>
+
+      <p class="alert" id="form-error" hidden></p>
+
+      <p class="form__actions">
+        <button class="button" type="submit" id="submit-button" data-i18n="reg.submit">Dokončiť registráciu</button>
+        <span class="muted">
+          <span data-i18n="reg.have">Už máte účet?</span>
+          <a href="prihlasenie.html" data-i18n="btn.login">Prihlásiť sa</a>
+        </span>
+      </p>
+
+      <aside class="summary card">
+        <h2 data-i18n="reg.summary">Súhrn</h2>
+        <p class="muted" data-i18n="acc.cat">Kategória</p>
+        <p class="summary__value" id="summary-category"></p>
+        <p class="muted" data-i18n="pay.amount">Suma</p>
+        <p class="summary__value" id="summary-fee"></p>
+
+        <h3 data-i18n="reg.next">Čo bude nasledovať</h3>
+        <p class="muted" data-i18n="reg.n1">1. Potvrdzovací e-mail</p>
+        <p class="muted" data-i18n="reg.n2">2. Platobné inštrukcie a úhrada prevodom</p>
+        <p class="muted" data-i18n="reg.n3">3. Potvrdenie prijatej platby</p>
+      </aside>
+
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer.org">Fakulta prírodných vied UCM v Trnave a Fakulta prírodných vied UMB v Banskej Bystrici</p>
+    <p data-i18n="footer.contact">Kontakt: [doplniť e-mail]</p>
+    <p>&copy; 2026 ANS</p>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>

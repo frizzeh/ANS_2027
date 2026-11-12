@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.index">ANS 2027 – Applied Natural Sciences</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand__logo">ANS</span>
+      ANS 2027
+    </a>
+
+    <nav class="site-nav" aria-label="Hlavné menu">
+      <ul>
+        <li><a href="index.html#program" data-i18n="nav.program">Program</a></li>
+        <li><a href="index.html#speakers" data-i18n="nav.speakers">Rečníci</a></li>
+        <li><a href="index.html#fees" data-i18n="nav.fees">Poplatky</a></li>
+        <li><a href="index.html#venue" data-i18n="nav.venue">Miesto a ubytovanie</a></li>
+      </ul>
+    </nav>
+
+    <ul class="lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <p class="auth">
+      <a class="button button--light" href="prihlasenie.html" data-auth="guest" data-i18n="btn.login">Prihlásiť sa</a>
+      <a class="button button--light" href="admin.html" data-auth="admin" data-i18n="nav.admin" hidden>Admin</a>
+      <a class="button button--light" href="superadmin.html" data-auth="superadmin" data-i18n="nav.superadmin" hidden>Super admin</a>
+      <a class="button button--light" href="ucet.html" data-auth="participant" data-i18n="btn.account" hidden>Môj účet</a>
+      <button class="link-button" type="button" data-auth="user" data-logout data-i18n="btn.logout" hidden>Odhlásiť sa</button>
+    </p>
+  </header>
+
+  <main>
+
+    <!-- Úvodná časť -->
+    <section class="hero">
+      <p class="eyebrow" data-i18n="hero.eyebrow">Medzinárodná vedecká konferencia</p>
+      <h1 class="hero__title">ANS 2027</h1>
+      <p class="hero__subtitle">Applied Natural Sciences</p>
+      <p class="hero__lead" data-i18n="hero.lead">
+        Medzinárodná vedecká konferencia o prírodných vedách. Registrácia, príspevky a platba na jednom mieste.
+      </p>
+
+      <ul class="hero__facts">
+        <li data-i18n="tba">[doplniť]</li>
+        <li data-i18n="tba">[doplniť]</li>
+        <li data-i18n="hero.lang">Jazyk: angličtina</li>
+      </ul>
+
+      <p class="hero__actions">
+        <a class="button button--cyan" href="registracia.html" data-i18n="btn.register">Registrovať sa</a>
+        <a class="button button--outline" href="prispevok.html" data-i18n="btn.submit">Odoslať príspevok</a>
+      </p>
+
+      <aside class="hero__dates" aria-labelledby="dates-title">
+        <h2 class="eyebrow" id="dates-title" data-i18n="dates.title">Dôležité termíny</h2>
+        <dl>
+          <dt data-i18n="dates.abstract">Uzávierka abstraktov</dt>
+          <dd data-i18n="tba">[doplniť]</dd>
+          <dt data-i18n="dates.accept">Oznámenie o prijatí</dt>
+          <dd data-i18n="tba">[doplniť]</dd>
+          <dt data-i18n="dates.payment">Uzávierka registrácie a platby</dt>
+          <dd data-i18n="tba">[doplniť]</dd>
+          <dt data-i18n="dates.conf">Konferencia</dt>
+          <dd data-i18n="tba">[doplniť]</dd>
+        </dl>
+      </aside>
+    </section>
+
+    <!-- Rýchle odkazy -->
+    <section class="quick" aria-label="Rýchle odkazy">
+      <ul class="cards">
+        <li>
+          <a class="card" href="registracia.html">
+            <p class="eyebrow" data-i18n="quick.new.label">Nový účastník</p>
+            <h3 data-i18n="quick.new.title">Registrácia</h3>
+            <p class="muted" data-i18n="quick.new.text">Vyplňte formulár a vyberte kategóriu účasti.</p>
+          </a>
+        </li>
+        <li>
+          <a class="card" href="prispevok.html">
+            <p class="eyebrow" data-i18n="quick.paper.label">Autori</p>
+            <h3 data-i18n="quick.paper.title">Odoslať príspevok</h3>
+            <p class="muted" data-i18n="quick.paper.text">Abstrakt, článok alebo poster podľa šablóny.</p>
+          </a>
+        </li>
+        <li>
+          <a class="card" href="ucet.html">
+            <p class="eyebrow" data-i18n="quick.acc.label">Už ste registrovaný</p>
+            <h3 data-i18n="quick.acc.title">Môj účet</h3>
+            <p class="muted" data-i18n="quick.acc.text">Stav platby, príspevku a recenzií.</p>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Ako to funguje -->
+    <section class="section" aria-labelledby="steps-title">
+      <header class="section__head">
+        <p class="eyebrow" data-i18n="steps.label">Ako to funguje</p>
+        <h2 class="section__title" id="steps-title" data-i18n="steps.title">Štyri jednoduché kroky</h2>
+      </header>
+
+      <ol class="cards">
+        <li class="step">
+          <span class="step__number">1</span>
+          <h3 data-i18n="steps.1.t">Zaregistrujte sa</h3>
+          <p class="muted" data-i18n="steps.1.d">Vyberiete kategóriu účasti a vyplníte údaje.</p>
+        </li>
+        <li class="step">
+          <span class="step__number">2</span>
+          <h3 data-i18n="steps.2.t">Uhraďte poplatok</h3>
+          <p class="muted" data-i18n="steps.2.d">Dostanete e-mail s platobnými údajmi. Platí sa bankovým prevodom.</p>
+        </li>
+        <li class="step">
+          <span class="step__number">3</span>
+          <h3 data-i18n="steps.3.t">Odošlite príspevok</h3>
+          <p class="muted" data-i18n="steps.3.d">Nahráte abstrakt alebo poster a sledujete recenziu.</p>
+        </li>
+        <li class="step">
+          <span class="step__number">4</span>
+          <h3 data-i18n="steps.4.t">Príďte na konferenciu</h3>
+          <p class="muted" data-i18n="steps.4.d">Program a organizačné informácie nájdete v účte.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Poplatky -->
+    <section class="section" id="fees" aria-labelledby="fees-title">
+      <header class="section__head">
+        <p class="eyebrow" data-i18n="fees.label">Poplatky</p>
+        <h2 class="section__title" id="fees-title" data-i18n="fees.title">Vyberte si kategóriu účasti</h2>
+        <p class="section__lead" data-i18n="fees.lead">Výšky poplatkov sa doplnia po schválení.</p>
+      </header>
+
+      <ul class="cards">
+        <li>
+          <article class="card">
+            <h3 data-i18n="cat.speaker">Registrovaný rečník</h3>
+            <p class="muted" data-i18n="cat.speaker.d">Prednáška v odbornej sekcii.</p>
+            <p class="price" data-fee="speaker" data-i18n="tba">[doplniť]</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <h3 data-i18n="cat.poster">Autor posteru</h3>
+            <p class="muted" data-i18n="cat.poster.d">Prezentácia posteru v posterovej sekcii.</p>
+            <p class="price" data-fee="poster" data-i18n="tba">[doplniť]</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <h3 data-i18n="cat.passive">Pasívny účastník</h3>
+            <p class="muted" data-i18n="cat.passive.d">Účasť bez vlastného príspevku.</p>
+            <p class="price" data-fee="passive" data-i18n="tba">[doplniť]</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Program -->
+    <section class="section" id="program" aria-labelledby="program-title">
+      <header class="section__head">
+        <p class="eyebrow" data-i18n="program.label">Program</p>
+        <h2 class="section__title" id="program-title" data-i18n="program.title">Program konferencie</h2>
+        <p class="section__lead" data-i18n="program.lead">Predbežný program. Podrobný rozpis sa zverejní neskôr.</p>
+      </header>
+
+      <dl class="timeline card">
+        <dt data-i18n="tba">[doplniť]</dt>
+        <dd data-i18n="prog.1">Registrácia a otvorenie konferencie</dd>
+        <dt data-i18n="tba">[doplniť]</dt>
+        <dd data-i18n="prog.2">Plenárne prednášky pozvaných rečníkov</dd>
+        <dt data-i18n="tba">[doplniť]</dt>
+        <dd data-i18n="prog.3">Odborné sekcie</dd>
+        <dt data-i18n="tba">[doplniť]</dt>
+        <dd data-i18n="prog.4">Posterová sekcia</dd>
+        <dt data-i18n="tba">[doplniť]</dt>
+        <dd data-i18n="prog.5">Slávnostná večera a spoločenský program</dd>
+      </dl>
+    </section>
+
+    <!-- Rečníci -->
+    <section class="section" id="speakers" aria-labelledby="speakers-title">
+      <header class="section__head">
+        <p class="eyebrow" data-i18n="speakers.label">Rečníci</p>
+        <h2 class="section__title" id="speakers-title" data-i18n="speakers.title">Pozvaní prednášajúci</h2>
+      </header>
+
+      <ul class="cards">
+        <li>
+          <article class="card">
+            <p class="avatar" aria-hidden="true">?</p>
+            <h3 data-i18n="spk.name">[Meno rečníka]</h3>
+            <p class="muted" data-i18n="spk.inst">[Inštitúcia, krajina]</p>
+            <p data-i18n="spk.talk">[Názov prednášky]</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <p class="avatar" aria-hidden="true">?</p>
+            <h3 data-i18n="spk.name">[Meno rečníka]</h3>
+            <p class="muted" data-i18n="spk.inst">[Inštitúcia, krajina]</p>
+            <p data-i18n="spk.talk">[Názov prednášky]</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <p class="avatar" aria-hidden="true">?</p>
+            <h3 data-i18n="spk.name">[Meno rečníka]</h3>
+            <p class="muted" data-i18n="spk.inst">[Inštitúcia, krajina]</p>
+            <p data-i18n="spk.talk">[Názov prednášky]</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Miesto a ubytovanie -->
+    <section class="venue" id="venue" aria-labelledby="venue-title">
+      <p class="eyebrow" data-i18n="venue.label">Miesto a ubytovanie</p>
+      <h2 class="section__title" id="venue-title" data-i18n="venue.title">Miesto konania</h2>
+      <p data-i18n="venue.text">
+        Ubytovanie si zabezpečujete individuálne priamo v hoteli. Odporúčaný hotel: [doplniť], kontakt a rezervačný kód: [doplniť].
+      </p>
+      <a class="button button--cyan" href="#" data-i18n="venue.btn">Rezervovať v hoteli</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer.org">Fakulta prírodných vied UCM v Trnave a Fakulta prírodných vied UMB v Banskej Bystrici</p>
+    <p data-i18n="footer.contact">Kontakt: [doplniť e-mail]</p>
+    <p>&copy; 2026 ANS</p>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>
