@@ -1,0 +1,17 @@
+# ANS 2027 – zabezpečenie pre Apache (pri inom serveri nastav to isté v jeho konfigurácii)
+Options -Indexes
+
+# Súbory, ktoré nemajú byť verejne dostupné
+<FilesMatch "\.(sql|txt|md|log)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "no-referrer"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'; frame-ancestors 'none'"
+    # Po nasadení na HTTPS odkomentuj:
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
