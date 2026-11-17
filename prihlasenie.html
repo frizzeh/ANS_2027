@@ -2,6 +2,8 @@
 <html lang="sk">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="title.login">Prihlásenie – ANS 2027</title>
   <link rel="stylesheet" href="css/style.css">
@@ -50,7 +52,7 @@
         <input type="email" name="email" required>
       </label>
       <label class="field">
-        <span data-i18n="f.password">Heslo</span>
+        <span data-i18n="f.password">Heslo (aspoň 8 znakov)</span>
         <input type="password" name="password" required>
       </label>
 
@@ -69,8 +71,9 @@
 
   <footer class="site-footer">
     <p data-i18n="footer.org">Fakulta prírodných vied UCM v Trnave a Fakulta prírodných vied UMB v Banskej Bystrici</p>
-    <p data-i18n="footer.contact">Kontakt: [doplniť e-mail]</p>
-    <p>&copy; 2026 ANS</p>
+    <p><span data-i18n="footer.contact">Kontakt:</span> <a href="mailto:ans2027@ucm.sk">ans2027@ucm.sk</a></p>
+    <p><a href="demo.html" data-i18n="demo.hub">Ukážky</a></p>
+    <p>&copy; 2027 ANS</p>
   </footer>
 
   <script src="js/i18n.js"></script>

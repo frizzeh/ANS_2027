@@ -1,0 +1,174 @@
+/* ==========================================================================
+   ANS 2027 – kostra aplikácie: bočné menu a obsah
+   Používa ju účet účastníka aj administrácia. Načítava sa po css/style.css.
+
+   1.  Rozloženie
+   2.  Bočné menu
+   3.  Hlavička stránky a mriežka kariet
+   4.  Mobil
+   ========================================================================== */
+
+
+/* 1. Rozloženie
+   -------------------------------------------------------------------------- */
+.app {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.app__main {
+  min-width: 0;
+  padding: 2.5rem 3rem 4rem;
+}
+
+/* Rovnaká medzera medzi všetkými časťami stránky */
+.app__main > * + * {
+  margin-top: 1.5rem;
+}
+
+
+/* 2. Bočné menu
+   -------------------------------------------------------------------------- */
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100vh;
+  padding: 1.75rem 1rem;
+  color: #c7d2fe;
+  background: var(--navy);
+}
+
+.sidebar__brand {
+  padding: 0 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar__menu {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.sidebar__menu a {
+  display: block;
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+  color: #c7d2fe;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar__menu a:hover {
+  color: #fff;
+  background: var(--navy-soft);
+}
+
+.sidebar__menu a:focus-visible {
+  outline-color: #fff;
+}
+
+/* Aktívna stránka */
+.sidebar__menu a[aria-current="page"] {
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+}
+
+.sidebar__role {
+  margin-top: -1.1rem;
+  padding: 0 0.75rem;
+  font-size: 0.9rem;
+  color: #c7d2fe;
+}
+
+.sidebar__link {
+  padding: 0 0.75rem;
+  font-size: 0.9rem;
+  color: #8fa0d8;
+}
+
+.sidebar__lang {
+  align-self: flex-start;
+  margin: auto 0 0 0.75rem;
+}
+
+.sidebar__back {
+  padding: 0 0.75rem;
+  font-size: 0.9rem;
+  color: #8fa0d8;
+}
+
+
+/* 3. Hlavička stránky a mriežka kariet
+   -------------------------------------------------------------------------- */
+.app__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.app__head h1 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.15;
+}
+
+.app__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1.5rem;
+}
+
+.app__grid > .card > .eyebrow + * {
+  margin-top: 0.6rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.25rem;
+}
+
+
+/* 4. Mobil
+   -------------------------------------------------------------------------- */
+@media (max-width: 50rem) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  /* Menu sa zmení na pruh nad obsahom */
+  .sidebar {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    height: auto;
+    gap: 0.75rem 1.5rem;
+  }
+
+  .sidebar__menu {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .sidebar__lang {
+    margin: 0;
+  }
+
+  .app__main {
+    padding: 1.5rem 1.25rem 3rem;
+  }
+}

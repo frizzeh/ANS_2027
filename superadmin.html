@@ -2,6 +2,8 @@
 <html lang="sk">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="title.superadmin">Super admin – ANS 2027</title>
   <link rel="stylesheet" href="css/style.css">
@@ -50,13 +52,14 @@
     <!-- Administrátori -->
     <section class="card table-card" aria-labelledby="admins-title">
       <header class="table-card__head">
-        <h2 id="admins-title" data-i18n="sup.admins.title">Administrátori</h2>
+        <h2 id="admins-title" data-i18n="sup.admins.title">Zamestnanci a administrátori</h2>
       </header>
       <table class="table">
         <thead>
           <tr>
             <th scope="col" data-i18n="adm.col.name">Meno</th>
             <th scope="col" data-i18n="f.email">E-mail</th>
+            <th scope="col" data-i18n="sup.col.role">Rola</th>
             <th scope="col" data-i18n="adm.col.status">Stav</th>
             <th scope="col" data-i18n="adm.col.action">Akcia</th>
           </tr>
@@ -80,7 +83,22 @@
           <span data-i18n="f.password">Heslo (aspoň 8 znakov)</span>
           <input type="password" name="password" minlength="8" required>
         </label>
-        <button class="button" type="submit" data-i18n="sup.create">Vytvoriť administrátora</button>
+        <label class="field">
+          <span data-i18n="sup.col.role">Rola</span>
+          <select name="role" id="new-role" required></select>
+        </label>
+        <button class="button" type="submit" data-i18n="sup.create">Vytvoriť účet zamestnanca</button>
+      </form>
+      <form class="inline-form" id="role-form">
+        <label class="field">
+          <span data-i18n="sup.role.email">E-mail existujúceho používateľa</span>
+          <input type="email" name="email" required>
+        </label>
+        <label class="field">
+          <span data-i18n="sup.col.role">Rola</span>
+          <select name="role" id="existing-role" required></select>
+        </label>
+        <button class="button" type="submit" data-i18n="sup.role.add">Pridať rolu</button>
       </form>
     </section>
 
@@ -147,8 +165,8 @@
 
   <footer class="site-footer">
     <p data-i18n="footer.org">Fakulta prírodných vied UCM v Trnave a Fakulta prírodných vied UMB v Banskej Bystrici</p>
-    <p data-i18n="footer.contact">Kontakt: [doplniť e-mail]</p>
-    <p>&copy; 2026 ANS</p>
+    <p><span data-i18n="footer.contact">Kontakt:</span> <a href="mailto:ans2027@ucm.sk">ans2027@ucm.sk</a></p>
+    <p>&copy; 2027 ANS</p>
   </footer>
 
   <script src="js/i18n.js"></script>

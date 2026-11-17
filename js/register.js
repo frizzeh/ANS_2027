@@ -31,8 +31,9 @@ function renderCategories() {
 
     $(".option__title", option).textContent = t("cat." + category.code);
     $(".option__text", option).textContent = t("cat." + category.code + ".d");
-    $(".option__fee", option).textContent =
-      `${category.fee} € · ${t("fee.student")} ${category.student_fee} €`;
+    $(".option__fee", option).textContent = category.student_fee === null
+      ? `${category.fee} €`
+      : `${category.fee} € · ${t("fee.student")} ${category.student_fee} €`;
 
     categoryGroup.insertBefore(option, studentLabel);
   });
@@ -47,7 +48,7 @@ function render() {
   const isStudent = form.elements.isStudent.checked;
 
   summaryCategory.textContent = t("cat." + category.code);
-  summaryFee.textContent = (isStudent ? category.student_fee : category.fee) + " €";
+  summaryFee.textContent = (isStudent && category.student_fee !== null ? category.student_fee : category.fee) + " €";
   paperGroup.hidden = isPassive;
   paperGroup.disabled = isPassive; // vypnuté polia sa pri odoslaní nekontrolujú
 }

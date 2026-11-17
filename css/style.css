@@ -77,6 +77,15 @@ a {
   outline-offset: 2px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 [hidden] {
   display: none !important;
 }
@@ -735,6 +744,21 @@ textarea {
   background: #dcfce7;
 }
 
+.badge--info {
+  color: #3730a3;
+  background: #e0e7ff;
+}
+
+.badge--muted {
+  color: #334155;
+  background: #e2e8f0;
+}
+
+.badge--bad {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
 .paper__title {
   margin: 0.4rem 0;
   font-size: 1.4rem;
@@ -932,4 +956,428 @@ textarea {
   font-weight: 600;
   color: #166534;
   background: #dcfce7;
+}
+
+
+/* Demo režim (bez PHP a databázy)
+   -------------------------------------------------------------------------- */
+.demo-banner {
+  position: fixed;
+  inset: auto 1rem 1rem auto;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  max-width: calc(100vw - 2rem);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  background: #17233b;
+  color: #fff;
+  font-size: 0.85rem;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.25);
+}
+
+.demo-banner p {
+  margin: 0;
+}
+
+.demo-banner a {
+  color: #8fe3ff;
+}
+
+.demo-banner button {
+  padding: 0.25rem 0.7rem;
+  border: 1px solid rgb(255 255 255 / 0.4);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.demo-banner button:hover {
+  background: rgb(255 255 255 / 0.15);
+}
+
+.demo-views {
+  list-style: none;
+  padding: 0;
+}
+
+.demo-views li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.demo-views p {
+  margin: 0;
+}
+
+.demo-views .button {
+  align-self: flex-start;
+}
+
+.demo-views .button {
+  margin-top: auto;
+}
+
+.link-button {
+  color: var(--accent, #4f46e5);
+}
+
+/* Výber ukážkovej roly v demo pruhu */
+.demo-banner__role {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.demo-banner__role select {
+  appearance: none;
+  padding: 0.4rem 2rem 0.4rem 0.8rem;
+  border: 2px solid #4f6bff;
+  border-radius: 6px;
+  background: #0b1224 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='white' stroke-width='2'%3E%3Cpath d='m1 1 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 0.7rem center;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+/* 12. Responzívne mriežky bez „osamelých“ kariet
+   Počet stĺpcov sa prispôsobuje počtu kariet: tri karty sú buď tri vedľa seba, alebo pod sebou
+   (nikdy 2 + 1), štyri karty sú buď štyri vedľa seba, alebo 2 × 2. Karty v riadku majú rovnakú výšku.
+   -------------------------------------------------------------------------- */
+.cards {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+/* Prvok zoznamu aj karta v ňom vyplnia celú bunku mriežky */
+.cards > li:has(> .card, > article) {
+  display: flex;
+}
+
+.cards > li > .card,
+.cards > li > article {
+  flex: 1;
+}
+
+/* Tri karty */
+.cards:has(> :nth-child(3):last-child) {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 46rem) {
+  .cards:has(> :nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Štyri karty (kroky na úvodnej stránke, prehľadové čísla v administrácii) */
+.cards:has(> :nth-child(4):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 56rem) {
+  .cards:has(> :nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Kategórie účasti v registrácii: tri možnosti vedľa seba, študentské zníženie pod nimi na celú šírku */
+#category-group {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 46rem) {
+  #category-group {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+#category-group > :not(.option) {
+  grid-column: 1 / -1;
+}
+
+/* Veľmi úzke obrazovky: menšie odsadenie kariet, aby zostalo viac miesta pre obsah */
+@media (max-width: 30rem) {
+  .card {
+    padding: 1.25rem;
+  }
+
+  .group {
+    padding: 1.1rem;
+  }
+}
+
+
+/* Demo ovládanie: malý odkaz v ľavom hornom rohu, panel sa otvorí až po kliknutí */
+.demo-banner {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 60;
+  display: block;
+  max-width: calc(100vw - 0.7rem);
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.85rem;
+}
+
+.demo-banner summary {
+  display: inline-block;
+  padding: 0.15rem 0.8rem 0.2rem 0.6rem;
+  border: 2px solid #67e8f9;
+  border-width: 0 2px 2px 0;
+  border-radius: 0 0 0.8rem 0;
+  background: #17233b;
+  color: #67e8f9;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  list-style: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.35);
+  transition: background 0.2s, color 0.2s;
+}
+
+.demo-banner summary::-webkit-details-marker {
+  display: none;
+}
+
+.demo-banner summary:hover,
+.demo-banner summary:focus-visible,
+.demo-banner[open] summary {
+  background: #67e8f9;
+  color: #17233b;
+}
+
+.demo-banner__panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  margin: 0.4rem 0 0 0.4rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius);
+  background: #17233b;
+  color: #fff;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.3);
+}
+
+.demo-banner__panel p {
+  margin: 0;
+}
+
+
+/* Kroky „Ako to funguje“: každý krok je vzdušná karta s číslom, nadpisom a popisom pod sebou */
+.step {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.step h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.step p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* Údaje o hoteli v sekcii Miesto a ubytovanie */
+.venue__list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: #c7d2fe;
+}
+
+.venue__list a {
+  color: #67e8f9;
+}
+
+
+/* Pätička vždy na spodku okna, aj keď je na stránke málo obsahu (napr. prihlásenie) */
+body:has(> .site-footer) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body:has(> .site-footer) > main {
+  flex: 1 0 auto;
+}
+
+/* Roly používateľa ako štítky s tlačidlom na odobratie */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.35rem 0.15rem 0.75rem;
+  border-radius: 999px;
+  background: #e0e7ff;
+  color: #312e81;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.chip--fixed {
+  padding-right: 0.75rem;
+}
+
+.chip button {
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.chip button:hover {
+  background: #c7d2fe;
+}
+
+.role-add {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.role-add select {
+  width: auto;
+  min-width: 9rem;
+  padding: 0.4rem 0.7rem;
+}
+
+.sup-actions {
+  min-width: 24rem;
+}
+
+.role-add .button {
+  white-space: nowrap;
+}
+
+/* Informácie o ochrane osobných údajov */
+.privacy-layout {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 1.5rem;
+}
+
+.privacy-toc {
+  position: sticky;
+  top: 1rem;
+  font-size: 0.95rem;
+}
+
+.privacy-toc ol {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: toc;
+}
+
+.privacy-toc li {
+  counter-increment: toc;
+}
+
+.privacy-toc a {
+  display: block;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.5rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.privacy-toc a::before {
+  content: counter(toc) ". ";
+  color: var(--muted);
+}
+
+.privacy-toc a:hover {
+  background: var(--card);
+}
+
+.privacy-doc {
+  padding: 2rem 2.5rem;
+}
+
+.privacy-doc section {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.privacy-doc section:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.privacy-doc section:last-child {
+  padding-bottom: 0;
+}
+
+.privacy-doc h2 {
+  margin-bottom: 0.6rem;
+  font-size: 1.2rem;
+}
+
+.privacy-doc ul {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+@media (max-width: 50rem) {
+  .privacy-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .privacy-toc {
+    position: static;
+  }
+
+  .privacy-toc ol {
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    overflow-x: auto;
+  }
+
+  .privacy-doc {
+    padding: 1.5rem;
+  }
 }

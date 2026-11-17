@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.account">Môj účet – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/account.css">
+</head>
+<body class="app">
+
+  <nav class="sidebar" aria-label="Menu účtu">
+    <a class="sidebar__brand" href="index.html">ANS 2027</a>
+
+    <ul class="sidebar__menu">
+      <li><a href="ucet.html" data-i18n="side.overview">Prehľad</a></li>
+      <li><a href="ucet-registracia.html" data-i18n="side.registration">Registrácia</a></li>
+      <li><a href="ucet-prispevky.html" data-i18n="side.papers">Príspevky</a></li>
+      <li><a href="ucet-platba.html" data-i18n="side.payment">Platba</a></li>
+      <li><a href="ucet-nastavenia.html" aria-current="page" data-i18n="side.settings">Nastavenia</a></li>
+    </ul>
+
+    <ul class="lang sidebar__lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <a class="sidebar__back" href="index.html" data-i18n="side.website">Späť na web</a>
+  </nav>
+
+  <main class="app__main">
+    <header class="app__head">
+      <hgroup>
+        <h1 data-i18n="side.settings">Nastavenia</h1>
+        <p class="muted" id="user-subtitle"></p>
+      </hgroup>
+      <button class="button button--ghost" type="button" data-logout data-i18n="btn.logout">Odhlásiť sa</button>
+    </header>
+
+    <p class="alert" id="error" hidden></p>
+
+    <p class="notice" id="notice" data-i18n="common.saved" hidden>Zmeny boli uložené.</p>
+
+    <form class="form--stack" id="profile-form">
+      <fieldset class="group">
+        <legend data-i18n="reg.s.person">Osobné údaje</legend>
+        <label class="field">
+          <span data-i18n="f.titlebefore">Titul pred menom</span>
+          <input type="text" name="titleBefore">
+        </label>
+        <label class="field">
+          <span data-i18n="f.titleafter">Titul za menom</span>
+          <input type="text" name="titleAfter">
+        </label>
+        <label class="field">
+          <span data-i18n="f.firstname">Meno</span>
+          <input type="text" name="firstName" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.lastname">Priezvisko</span>
+          <input type="text" name="lastName" required>
+        </label>
+        <label class="field">
+          <span data-i18n="set.email">E-mail (slúži na prihlásenie)</span>
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label class="field">
+          <span data-i18n="f.org">Organizácia alebo inštitúcia</span>
+          <input type="text" name="organization">
+        </label>
+        <label class="field">
+          <span data-i18n="set.address">Adresa organizácie</span>
+          <input type="text" name="organizationAddress">
+        </label>
+        <label class="field">
+          <span data-i18n="f.dept">Pracovisko alebo oddelenie</span>
+          <input type="text" name="department">
+        </label>
+        <label class="field">
+          <span data-i18n="f.country">Krajina</span>
+          <input type="text" name="country">
+        </label>
+        <label class="field">
+          <span data-i18n="set.language">Jazyk rozhrania</span>
+          <select name="language">
+            <option value="sk" data-i18n="set.lang.sk">Slovenčina</option>
+            <option value="en" data-i18n="set.lang.en">Angličtina</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <p class="form__actions">
+        <button class="button" type="submit" data-i18n="common.save">Uložiť zmeny</button>
+      </p>
+    </form>
+
+    <form class="form--stack" id="password-form">
+      <fieldset class="group">
+        <legend data-i18n="set.password">Zmena hesla</legend>
+        <label class="field">
+          <span data-i18n="set.current">Aktuálne heslo</span>
+          <input type="password" name="currentPassword" required autocomplete="current-password">
+        </label>
+        <label class="field">
+          <span data-i18n="set.new">Nové heslo (aspoň 8 znakov)</span>
+          <input type="password" name="newPassword" required minlength="8" autocomplete="new-password">
+        </label>
+      </fieldset>
+
+      <p class="form__actions">
+        <button class="button" type="submit" data-i18n="common.save">Uložiť zmeny</button>
+      </p>
+    </form>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/account.js"></script>
+  <script src="js/account-settings.js"></script>
+</body>
+</html>

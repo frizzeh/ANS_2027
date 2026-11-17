@@ -2,6 +2,8 @@
 <html lang="sk">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="title.index">ANS 2027 – Applied Natural Sciences</title>
   <link rel="stylesheet" href="css/style.css">
@@ -49,27 +51,27 @@
       </p>
 
       <ul class="hero__facts">
-        <li data-i18n="tba">[doplniť]</li>
-        <li data-i18n="tba">[doplniť]</li>
+        <li data-conference-range>13.–14. mája 2027</li>
+        <li data-conference-location>Trnava, Slovensko</li>
         <li data-i18n="hero.lang">Jazyk: angličtina</li>
       </ul>
 
       <p class="hero__actions">
         <a class="button button--cyan" href="registracia.html" data-i18n="btn.register">Registrovať sa</a>
-        <a class="button button--outline" href="prispevok.html" data-i18n="btn.submit">Odoslať príspevok</a>
+        <a class="button button--outline" href="ucet-prispevky.html" data-i18n="btn.submit">Odoslať príspevok</a>
       </p>
 
       <aside class="hero__dates" aria-labelledby="dates-title">
         <h2 class="eyebrow" id="dates-title" data-i18n="dates.title">Dôležité termíny</h2>
         <dl>
           <dt data-i18n="dates.abstract">Uzávierka abstraktov</dt>
-          <dd data-i18n="tba">[doplniť]</dd>
+          <dd data-deadline="submission" data-i18n="tba">čoskoro</dd>
           <dt data-i18n="dates.accept">Oznámenie o prijatí</dt>
-          <dd data-i18n="tba">[doplniť]</dd>
+          <dd data-deadline="review" data-i18n="tba">čoskoro</dd>
           <dt data-i18n="dates.payment">Uzávierka registrácie a platby</dt>
-          <dd data-i18n="tba">[doplniť]</dd>
+          <dd data-deadline="payment" data-i18n="tba">čoskoro</dd>
           <dt data-i18n="dates.conf">Konferencia</dt>
-          <dd data-i18n="tba">[doplniť]</dd>
+          <dd data-conference-date data-i18n="tba">čoskoro</dd>
         </dl>
       </aside>
     </section>
@@ -85,7 +87,7 @@
           </a>
         </li>
         <li>
-          <a class="card" href="prispevok.html">
+          <a class="card" href="ucet-prispevky.html">
             <p class="eyebrow" data-i18n="quick.paper.label">Autori</p>
             <h3 data-i18n="quick.paper.title">Odoslať príspevok</h3>
             <p class="muted" data-i18n="quick.paper.text">Abstrakt, článok alebo poster podľa šablóny.</p>
@@ -145,21 +147,21 @@
           <article class="card">
             <h3 data-i18n="cat.speaker">Registrovaný rečník</h3>
             <p class="muted" data-i18n="cat.speaker.d">Prednáška v odbornej sekcii.</p>
-            <p class="price" data-fee="speaker" data-i18n="tba">[doplniť]</p>
+            <p class="price" data-fee="speaker" data-i18n="tba">čoskoro</p>
           </article>
         </li>
         <li>
           <article class="card">
-            <h3 data-i18n="cat.poster">Autor posteru</h3>
-            <p class="muted" data-i18n="cat.poster.d">Prezentácia posteru v posterovej sekcii.</p>
-            <p class="price" data-fee="poster" data-i18n="tba">[doplniť]</p>
+            <h3 data-i18n="cat.poster_author">Autor posteru</h3>
+            <p class="muted" data-i18n="cat.poster_author.d">Prezentácia posteru v posterovej sekcii.</p>
+            <p class="price" data-fee="poster_author" data-i18n="tba">čoskoro</p>
           </article>
         </li>
         <li>
           <article class="card">
             <h3 data-i18n="cat.passive">Pasívny účastník</h3>
             <p class="muted" data-i18n="cat.passive.d">Účasť bez vlastného príspevku.</p>
-            <p class="price" data-fee="passive" data-i18n="tba">[doplniť]</p>
+            <p class="price" data-fee="passive" data-i18n="tba">čoskoro</p>
           </article>
         </li>
       </ul>
@@ -174,16 +176,18 @@
       </header>
 
       <dl class="timeline card">
-        <dt data-i18n="tba">[doplniť]</dt>
+        <dt data-day="0" data-time="08:30">13. 5. · 08:30</dt>
         <dd data-i18n="prog.1">Registrácia a otvorenie konferencie</dd>
-        <dt data-i18n="tba">[doplniť]</dt>
+        <dt data-day="0" data-time="09:30">13. 5. · 09:30</dt>
         <dd data-i18n="prog.2">Plenárne prednášky pozvaných rečníkov</dd>
-        <dt data-i18n="tba">[doplniť]</dt>
+        <dt data-day="0" data-time="11:00">13. 5. · 11:00</dt>
         <dd data-i18n="prog.3">Odborné sekcie</dd>
-        <dt data-i18n="tba">[doplniť]</dt>
+        <dt data-day="0" data-time="14:00">13. 5. · 14:00</dt>
         <dd data-i18n="prog.4">Posterová sekcia</dd>
-        <dt data-i18n="tba">[doplniť]</dt>
+        <dt data-day="0" data-time="19:00">13. 5. · 19:00</dt>
         <dd data-i18n="prog.5">Slávnostná večera a spoločenský program</dd>
+        <dt data-day="1" data-time="12:00">14. 5. · 12:00</dt>
+        <dd data-i18n="prog.6">Vyhodnotenie a ukončenie konferencie</dd>
       </dl>
     </section>
 
@@ -197,26 +201,26 @@
       <ul class="cards">
         <li>
           <article class="card">
-            <p class="avatar" aria-hidden="true">?</p>
-            <h3 data-i18n="spk.name">[Meno rečníka]</h3>
-            <p class="muted" data-i18n="spk.inst">[Inštitúcia, krajina]</p>
-            <p data-i18n="spk.talk">[Názov prednášky]</p>
+            <p class="avatar" aria-hidden="true">EM</p>
+            <h3>Prof. Elena Marchetti</h3>
+            <p class="muted" data-i18n="spk.1.inst">Univerzita v Padove, Taliansko</p>
+            <p data-i18n="spk.1.talk">Mikrobiálne spoločenstvá v meniacom sa podnebí</p>
           </article>
         </li>
         <li>
           <article class="card">
-            <p class="avatar" aria-hidden="true">?</p>
-            <h3 data-i18n="spk.name">[Meno rečníka]</h3>
-            <p class="muted" data-i18n="spk.inst">[Inštitúcia, krajina]</p>
-            <p data-i18n="spk.talk">[Názov prednášky]</p>
+            <p class="avatar" aria-hidden="true">JN</p>
+            <h3>Dr. Jakub Nowak</h3>
+            <p class="muted" data-i18n="spk.2.inst">Jagelonská univerzita v Krakove, Poľsko</p>
+            <p data-i18n="spk.2.talk">Strojové učenie v analýze biologických dát</p>
           </article>
         </li>
         <li>
           <article class="card">
-            <p class="avatar" aria-hidden="true">?</p>
-            <h3 data-i18n="spk.name">[Meno rečníka]</h3>
-            <p class="muted" data-i18n="spk.inst">[Inštitúcia, krajina]</p>
-            <p data-i18n="spk.talk">[Názov prednášky]</p>
+            <p class="avatar" aria-hidden="true">AL</p>
+            <h3>Prof. Anna Lindqvist</h3>
+            <p class="muted" data-i18n="spk.3.inst">Univerzita v Uppsale, Švédsko</p>
+            <p data-i18n="spk.3.talk">Zelená chémia a udržateľné materiály</p>
           </article>
         </li>
       </ul>
@@ -227,17 +231,19 @@
       <p class="eyebrow" data-i18n="venue.label">Miesto a ubytovanie</p>
       <h2 class="section__title" id="venue-title" data-i18n="venue.title">Miesto konania</h2>
       <p data-i18n="venue.text">
-        Ubytovanie si zabezpečujete individuálne priamo v hoteli. Odporúčaný hotel: [doplniť], kontakt a rezervačný kód: [doplniť].
+        Ubytovanie si zabezpečujete individuálne priamo v hoteli. Po kliknutí na tlačidlo sa otvorí poloha hotelov v Mapách Google.
       </p>
-      <a class="button button--cyan" href="#" data-i18n="venue.btn">Rezervovať v hoteli</a>
+      <a class="button button--cyan" href="https://www.google.com/maps/search/?api=1&query=Hotel+Trnava" target="_blank" rel="noopener" data-i18n="venue.btn">Nájsť hotel (Mapy Google)</a>
     </section>
 
   </main>
 
   <footer class="site-footer">
     <p data-i18n="footer.org">Fakulta prírodných vied UCM v Trnave a Fakulta prírodných vied UMB v Banskej Bystrici</p>
-    <p data-i18n="footer.contact">Kontakt: [doplniť e-mail]</p>
-    <p>&copy; 2026 ANS</p>
+    <p><span data-i18n="footer.contact">Kontakt:</span> <a href="mailto:ans2027@ucm.sk">ans2027@ucm.sk</a></p>
+    <p><a href="demo.html" data-i18n="demo.hub">Ukážky</a></p>
+    <p><a href="ochrana-udajov.html" data-i18n="footer.privacy">Ochrana údajov</a></p>
+    <p>&copy; 2027 ANS</p>
   </footer>
 
   <script src="js/i18n.js"></script>

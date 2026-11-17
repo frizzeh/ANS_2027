@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.reviewer">Recenzent – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/reviewer.css">
+</head>
+<body class="app">
+
+  <nav class="sidebar" aria-label="Menu recenzenta">
+    <a class="sidebar__brand" href="recenzent.html">ANS 2027</a>
+    <p class="sidebar__role" data-i18n="demo.role.reviewer">Recenzent</p>
+
+    <ul class="sidebar__menu">
+      <li><a href="recenzent.html" aria-current="page" data-i18n="side.reviewer">Moje recenzie</a></li>
+    </ul>
+
+    <ul class="lang sidebar__lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <a class="sidebar__link" href="admin.html" data-auth="admin" data-i18n="side.admin">Administrácia</a>
+    <a class="sidebar__link" href="index.html" data-i18n="side.website">Späť na web</a>
+    <button class="link-button sidebar__link" type="button" data-logout data-i18n="btn.logout">Odhlásiť sa</button>
+  </nav>
+
+  <main class="app__main" id="reviewer-main" hidden>
+    <header class="app__head">
+      <h1 data-i18n="side.reviewer">Moje recenzie</h1>
+      <p class="muted" data-i18n="rv.lead">Príspevky sú anonymné. Autor uvidí váš komentár pre autora, poznámky pre výbor zostanú skryté.</p>
+    </header>
+
+    <p class="alert" id="error" hidden></p>
+    <p class="notice" id="notice" data-i18n="rv.sent" hidden>Posudok bol uložený.</p>
+
+    <ul class="cards stats">
+      <li class="card">
+        <p class="muted" data-i18n="rv.stat.assigned">Pridelené príspevky</p>
+        <p class="stat__value" id="stat-assigned">0</p>
+      </li>
+      <li class="card">
+        <p class="muted" data-i18n="rv.stat.done">Odovzdané posudky</p>
+        <p class="stat__value" id="stat-done">0</p>
+      </li>
+      <li class="card">
+        <p class="muted" data-i18n="rv.stat.todo">Čaká na posudok</p>
+        <p class="stat__value" id="stat-todo">0</p>
+      </li>
+    </ul>
+
+    <section class="papers" id="papers" aria-label="Pridelené príspevky"></section>
+    <p class="muted" id="papers-empty" data-i18n="rv.empty" hidden>Zatiaľ vám nebol pridelený žiadny príspevok.</p>
+
+    <dialog class="dialog" id="review-dialog" aria-labelledby="review-dialog-title">
+      <header class="dialog__head">
+        <h2 id="review-dialog-title" data-i18n="rv.form.title">Posudok</h2>
+        <button class="button button--ghost button--small" type="button" id="review-close" data-i18n="rv.cancel">Zrušiť</button>
+      </header>
+      <form class="dialog__body form--stack" id="review-form">
+        <p class="muted" id="review-paper"></p>
+
+        <label class="field">
+          <span data-i18n="rv.score">Hodnotenie (1 – 10)</span>
+          <select id="review-score" required></select>
+        </label>
+
+        <fieldset class="choices">
+          <legend data-i18n="rv.recommendation">Odporúčanie</legend>
+          <label><input type="radio" name="recommendation" value="accept" required> <span data-i18n="rec.accept">Prijať</span></label>
+          <label><input type="radio" name="recommendation" value="accept_after_revision"> <span data-i18n="rec.accept_after_revision">Prijať po úpravách</span></label>
+          <label><input type="radio" name="recommendation" value="reject"> <span data-i18n="rec.reject">Zamietnuť</span></label>
+        </fieldset>
+
+        <label class="field">
+          <span data-i18n="rv.comment.author">Komentár pre autora</span>
+          <textarea id="review-author" rows="5" maxlength="5000"></textarea>
+        </label>
+
+        <label class="field">
+          <span data-i18n="rv.comment.committee">Poznámky pre výbor (autor ich neuvidí)</span>
+          <textarea id="review-committee" rows="3" maxlength="5000"></textarea>
+        </label>
+
+        <p class="alert" id="review-error" hidden></p>
+
+        <p class="actions">
+          <button class="button" type="submit" data-i18n="rv.submit">Odoslať posudok</button>
+        </p>
+      </form>
+    </dialog>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/reviewer.js"></script>
+</body>
+</html>

@@ -2,6 +2,8 @@
 <html lang="sk">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="title.register">Registrácia – ANS 2027</title>
   <link rel="stylesheet" href="css/style.css">
@@ -142,7 +144,7 @@
           <input type="text" name="billingCountry" required>
         </label>
         <label class="field">
-          <span data-i18n="f.billing.ico">IČO (nepovinné)</span>
+          <span data-i18n="f.billing.ico">IČO (povinné)</span>
           <input type="text" name="billingIco">
         </label>
         <label class="field">
@@ -158,7 +160,10 @@
 
       <label class="consent card">
         <input type="checkbox" name="gdpr" required>
-        <span data-i18n="reg.gdpr">Oboznámil(a) som sa s informáciami o spracúvaní osobných údajov.</span>
+        <span>
+          <span data-i18n="reg.gdpr">Oboznámil(a) som sa s informáciami o spracúvaní osobných údajov.</span>
+          <a href="ochrana-udajov.html" target="_blank" rel="noopener" data-i18n="reg.gdpr.link">Prečítať informácie</a>
+        </span>
       </label>
 
       <p class="alert" id="form-error" hidden></p>
@@ -189,8 +194,9 @@
 
   <footer class="site-footer">
     <p data-i18n="footer.org">Fakulta prírodných vied UCM v Trnave a Fakulta prírodných vied UMB v Banskej Bystrici</p>
-    <p data-i18n="footer.contact">Kontakt: [doplniť e-mail]</p>
-    <p>&copy; 2026 ANS</p>
+    <p><span data-i18n="footer.contact">Kontakt:</span> <a href="mailto:ans2027@ucm.sk">ans2027@ucm.sk</a></p>
+    <p><a href="ochrana-udajov.html" data-i18n="footer.privacy">Ochrana údajov</a></p>
+    <p>&copy; 2027 ANS</p>
   </footer>
 
   <script src="js/i18n.js"></script>

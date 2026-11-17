@@ -1,0 +1,105 @@
+/* ==========================================================================
+   ANS 2027 – štýly účtu účastníka (platba, termíny, príspevok)
+   Načítava sa po css/style.css a css/app.css.
+
+   1.  Platba a termíny
+   2.  Príspevok (štítky, postup, pripomienky)
+   3.  Mobil
+   ========================================================================== */
+
+
+/* 1. Platba a termíny
+   -------------------------------------------------------------------------- */
+.amount {
+  margin: 0.5rem 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+/* Termíny: názov vľavo, dátum vpravo */
+.terms {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.6rem 1rem;
+  margin-top: 0.75rem;
+}
+
+.terms dd {
+  font-weight: 700;
+}
+
+.steps-list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0.75rem 0 1rem;
+  padding-left: 1.25rem;
+  list-style: decimal;
+}
+
+
+/* 2. Príspevok
+   -------------------------------------------------------------------------- */
+.paper__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.paper__title {
+  margin: 0.25rem 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+/* Štyri kroky postupu: hotový (zelený), aktuálny (modrý), budúci (sivý) */
+.progress {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin: 1.5rem 0 0;
+}
+
+.progress li {
+  padding: 0.9rem 0.5rem;
+  border-radius: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  color: #334155;
+  background: #e2e8f0;
+}
+
+.progress .is-done {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.progress .is-current {
+  color: #fff;
+  background: var(--accent);
+}
+
+/* Pripomienky recenzentov */
+.review {
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.review__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+
+/* 3. Mobil
+   -------------------------------------------------------------------------- */
+@media (max-width: 50rem) {
+  .progress {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

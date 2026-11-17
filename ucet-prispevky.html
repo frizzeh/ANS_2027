@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.account">Môj účet – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/account.css">
+</head>
+<body class="app">
+
+  <nav class="sidebar" aria-label="Menu účtu">
+    <a class="sidebar__brand" href="index.html">ANS 2027</a>
+
+    <ul class="sidebar__menu">
+      <li><a href="ucet.html" data-i18n="side.overview">Prehľad</a></li>
+      <li><a href="ucet-registracia.html" data-i18n="side.registration">Registrácia</a></li>
+      <li><a href="ucet-prispevky.html" aria-current="page" data-i18n="side.papers">Príspevky</a></li>
+      <li><a href="ucet-platba.html" data-i18n="side.payment">Platba</a></li>
+      <li><a href="ucet-nastavenia.html" data-i18n="side.settings">Nastavenia</a></li>
+    </ul>
+
+    <ul class="lang sidebar__lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <a class="sidebar__back" href="index.html" data-i18n="side.website">Späť na web</a>
+  </nav>
+
+  <main class="app__main">
+    <header class="app__head">
+      <hgroup>
+        <h1 data-i18n="side.papers">Príspevky</h1>
+        <p class="muted" id="user-subtitle"></p>
+      </hgroup>
+      <button class="button button--ghost" type="button" data-logout data-i18n="btn.logout">Odhlásiť sa</button>
+    </header>
+
+    <p class="alert" id="error" hidden></p>
+
+    <p class="card muted" id="paper-none" data-i18n="paper.none" hidden>Pasívni účastníci príspevok nepodávajú.</p>
+
+    <article class="card paper" id="paper-card" hidden>
+      <header class="paper__head">
+        <hgroup>
+          <h2 class="eyebrow" data-i18n="paper.title">Môj príspevok</h2>
+          <p class="paper__title" id="paper-title"></p>
+          <p class="muted" id="paper-meta"></p>
+        </hgroup>
+        <span class="badge" id="paper-status"></span>
+      </header>
+
+      <ol class="progress" id="paper-progress">
+        <li data-i18n="step.submitted">Prihlásený</li>
+        <li data-i18n="step.check">Formálna kontrola</li>
+        <li data-i18n="step.review">Recenzia</li>
+        <li data-i18n="step.decision">Rozhodnutie</li>
+      </ol>
+
+      <p class="actions">
+        <a class="button" href="ucet-prispevky.html#upload" id="paper-upload"></a>
+        <a class="button button--ghost" href="ucet-prispevky.html#reviews" id="paper-reviews" data-i18n="paper.reviews">Pripomienky recenzentov</a>
+      </p>
+    </article>
+
+    <section class="card table-card" id="versions-card" aria-labelledby="versions-title" hidden>
+      <header class="table-card__head">
+        <h2 id="versions-title" data-i18n="papers.history">Verzie súboru</h2>
+      </header>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" data-i18n="papers.version">Verzia</th>
+            <th scope="col" data-i18n="paper.file">Súbor</th>
+            <th scope="col" data-i18n="papers.uploaded">Nahrané</th>
+            <th scope="col" data-i18n="file.actions">Akcie</th>
+          </tr>
+        </thead>
+        <tbody id="versions-body"></tbody>
+      </table>
+    </section>
+
+    <section class="card" id="upload" aria-labelledby="upload-title" hidden>
+      <h2 class="section-title" id="upload-title" data-i18n="pp.title">Prihlásiť príspevok</h2>
+      <p class="muted" id="paper-existing" data-i18n="pp.existing" hidden>
+        Príspevok je už odoslaný. Môžete nahrať novú verziu súboru.
+      </p>
+
+      <form class="form--stack" id="paper-form">
+        <fieldset class="group" id="paper-fields">
+          <legend data-i18n="reg.s.paper">Váš príspevok</legend>
+          <label class="field field--full" id="topic-field" hidden>
+            <span data-i18n="pp.topic">Tematická oblasť (symposium)</span>
+            <select name="topic" id="topic-select"></select>
+          </label>
+          <label class="field field--full">
+            <span data-i18n="f.papertitle">Názov príspevku</span>
+            <input type="text" name="paperTitle" required>
+          </label>
+          <label class="field field--full">
+            <span data-i18n="pp.abstract">Abstrakt</span>
+            <textarea name="abstract" required></textarea>
+          </label>
+          <label class="field field--full">
+            <span data-i18n="pp.keywords">Kľúčové slová (oddeľte čiarkou)</span>
+            <input type="text" name="keywords">
+          </label>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend data-i18n="paper.file">Súbor</legend>
+          <label class="field field--full">
+            <span data-i18n="pp.file">Súbor (PDF alebo DOCX)</span>
+            <input type="file" name="file" accept=".pdf,.docx" required>
+            <span class="field__hint" data-i18n="pp.file.hint">Šablónu a pokyny nájdete na webe konferencie.</span>
+          </label>
+        </fieldset>
+
+        <p class="form__actions">
+          <button class="button" type="submit" id="submit-button" data-i18n="pp.submit">Odoslať príspevok</button>
+        </p>
+      </form>
+    </section>
+
+    <section class="card" id="reviews" aria-labelledby="reviews-title" hidden>
+      <h2 class="section-title" id="reviews-title" data-i18n="paper.reviews">Pripomienky recenzentov</h2>
+      <ul id="reviews-list"></ul>
+    </section>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/account.js"></script>
+  <script src="js/account-papers.js"></script>
+</body>
+</html>

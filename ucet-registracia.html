@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.account">Môj účet – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/account.css">
+</head>
+<body class="app">
+
+  <nav class="sidebar" aria-label="Menu účtu">
+    <a class="sidebar__brand" href="index.html">ANS 2027</a>
+
+    <ul class="sidebar__menu">
+      <li><a href="ucet.html" data-i18n="side.overview">Prehľad</a></li>
+      <li><a href="ucet-registracia.html" aria-current="page" data-i18n="side.registration">Registrácia</a></li>
+      <li><a href="ucet-prispevky.html" data-i18n="side.papers">Príspevky</a></li>
+      <li><a href="ucet-platba.html" data-i18n="side.payment">Platba</a></li>
+      <li><a href="ucet-nastavenia.html" data-i18n="side.settings">Nastavenia</a></li>
+    </ul>
+
+    <ul class="lang sidebar__lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <a class="sidebar__back" href="index.html" data-i18n="side.website">Späť na web</a>
+  </nav>
+
+  <main class="app__main">
+    <header class="app__head">
+      <hgroup>
+        <h1 data-i18n="side.registration">Registrácia</h1>
+        <p class="muted" id="user-subtitle"></p>
+      </hgroup>
+      <button class="button button--ghost" type="button" data-logout data-i18n="btn.logout">Odhlásiť sa</button>
+    </header>
+
+    <p class="alert" id="error" hidden></p>
+
+    <p class="notice" id="notice" data-i18n="common.saved" hidden>Zmeny boli uložené.</p>
+
+    <section class="app__grid">
+
+      <article class="card">
+        <h2 class="eyebrow" data-i18n="rp.registration">Moja registrácia</h2>
+        <dl class="details">
+          <dt data-i18n="acc.cat">Kategória</dt>
+          <dd id="r-category"></dd>
+          <dt data-i18n="rp.student">Študent</dt>
+          <dd id="r-student"></dd>
+          <dt data-i18n="pay.amount">Suma</dt>
+          <dd id="r-amount"></dd>
+          <dt data-i18n="rp.exempt">Oslobodený od poplatku</dt>
+          <dd id="r-exempt"></dd>
+          <dt data-i18n="pay.vs">Variabilný symbol</dt>
+          <dd id="r-symbol"></dd>
+          <dt data-i18n="rp.created">Dátum registrácie</dt>
+          <dd id="r-created"></dd>
+          <dt data-i18n="rp.gdpr">Súhlas so spracovaním údajov</dt>
+          <dd id="r-gdpr"></dd>
+        </dl>
+      </article>
+
+      <article class="card">
+        <h2 class="eyebrow" data-i18n="reg.s.person">Osobné údaje</h2>
+        <dl class="details">
+          <dt data-i18n="rp.name">Meno a priezvisko</dt>
+          <dd id="p-name"></dd>
+          <dt data-i18n="f.email">E-mail</dt>
+          <dd id="p-email"></dd>
+          <dt data-i18n="f.org">Organizácia alebo inštitúcia</dt>
+          <dd id="p-org"></dd>
+          <dt data-i18n="f.dept">Pracovisko alebo oddelenie</dt>
+          <dd id="p-dept"></dd>
+          <dt data-i18n="f.country">Krajina</dt>
+          <dd id="p-country"></dd>
+        </dl>
+        <p class="muted">
+          <span data-i18n="rp.personal.hint">Osobné údaje zmeníte v Nastaveniach.</span>
+          <a href="ucet-nastavenia.html" data-i18n="side.settings">Nastavenia</a>
+        </p>
+      </article>
+
+    </section>
+
+    <form class="form--stack" id="billing-form">
+      <fieldset class="group">
+        <legend data-i18n="reg.s.billing">Fakturačné údaje a strava</legend>
+        <label class="field field--full">
+          <span data-i18n="f.billing.name">Názov platiteľa</span>
+          <input type="text" name="billingName">
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.street">Ulica a číslo</span>
+          <input type="text" name="billingStreet">
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.city">Mesto</span>
+          <input type="text" name="billingCity">
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.zip">PSČ</span>
+          <input type="text" name="billingZip">
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.country">Krajina platiteľa</span>
+          <input type="text" name="billingCountry">
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.ico">IČO (nepovinné)</span>
+          <input type="text" name="billingIco">
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.dic">DIČ (nepovinné)</span>
+          <input type="text" name="billingDic">
+        </label>
+        <label class="field">
+          <span data-i18n="f.billing.icdph">IČ DPH (nepovinné)</span>
+          <input type="text" name="billingIcDph">
+        </label>
+        <label class="field field--full">
+          <span data-i18n="f.diet">Stravovacie požiadavky (nepovinné)</span>
+          <textarea name="diet"></textarea>
+          <span class="field__hint" data-i18n="f.diet.hint">Napríklad alergie a intolerancie na slávnostnej večeri.</span>
+        </label>
+      </fieldset>
+
+      <p class="form__actions">
+        <button class="button" type="submit" data-i18n="common.save">Uložiť zmeny</button>
+      </p>
+    </form>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/account.js"></script>
+  <script src="js/account-registration.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.account">Môj účet – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/account.css">
+</head>
+<body class="app">
+
+  <nav class="sidebar" aria-label="Menu účtu">
+    <a class="sidebar__brand" href="index.html">ANS 2027</a>
+
+    <ul class="sidebar__menu">
+      <li><a href="ucet.html" data-i18n="side.overview">Prehľad</a></li>
+      <li><a href="ucet-registracia.html" data-i18n="side.registration">Registrácia</a></li>
+      <li><a href="ucet-prispevky.html" data-i18n="side.papers">Príspevky</a></li>
+      <li><a href="ucet-platba.html" aria-current="page" data-i18n="side.payment">Platba</a></li>
+      <li><a href="ucet-nastavenia.html" data-i18n="side.settings">Nastavenia</a></li>
+    </ul>
+
+    <ul class="lang sidebar__lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <a class="sidebar__back" href="index.html" data-i18n="side.website">Späť na web</a>
+  </nav>
+
+  <main class="app__main">
+    <header class="app__head">
+      <hgroup>
+        <h1 data-i18n="side.payment">Platba</h1>
+        <p class="muted" id="user-subtitle"></p>
+      </hgroup>
+      <button class="button button--ghost" type="button" data-logout data-i18n="btn.logout">Odhlásiť sa</button>
+    </header>
+
+    <p class="alert" id="error" hidden></p>
+
+    <section class="app__grid">
+
+      <article class="card">
+        <h2 class="eyebrow" data-i18n="pay.title">Platba</h2>
+        <p><span class="badge" id="pay-status"></span></p>
+        <p class="amount" id="pay-amount"></p>
+        <dl class="details">
+          <dt data-i18n="pay.iban">IBAN</dt>
+          <dd id="pay-iban"></dd>
+          <dt data-i18n="pay.vs">Variabilný symbol</dt>
+          <dd id="pay-symbol"></dd>
+          <dt data-i18n="pay.due">Splatnosť</dt>
+          <dd id="pay-due"></dd>
+        </dl>
+      </article>
+
+      <article class="card">
+        <h2 class="eyebrow" data-i18n="payp.how">Ako zaplatiť</h2>
+        <ol class="steps-list">
+          <li data-i18n="payp.1">Prevod uskutočnite na uvedený IBAN.</li>
+          <li data-i18n="payp.2">Uveďte variabilný symbol, inak platbu nespárujeme.</li>
+          <li data-i18n="payp.3">Po prijatí platby ju organizátor potvrdí a stav sa zmení na Zaplatené.</li>
+        </ol>
+        <p class="muted" data-i18n="pay.note">
+          Platobné inštrukcie dostanete aj e-mailom. Platbu potvrdzuje organizátor ručne.
+        </p>
+      </article>
+
+    </section>
+
+    <section class="card table-card" aria-labelledby="payments-title">
+      <header class="table-card__head">
+        <h2 id="payments-title" data-i18n="payp.received">Prijaté platby</h2>
+      </header>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" data-i18n="payp.date">Dátum</th>
+            <th scope="col" data-i18n="payp.type">Typ</th>
+            <th scope="col" data-i18n="pay.amount">Suma</th>
+          </tr>
+        </thead>
+        <tbody id="payments-body"></tbody>
+      </table>
+      <p class="muted table-card__empty" id="payments-empty" data-i18n="payp.none">Zatiaľ nebola prijatá žiadna platba.</p>
+    </section>
+
+    <section class="card table-card" id="invoices-card" aria-labelledby="invoices-title" hidden>
+      <header class="table-card__head">
+        <h2 id="invoices-title" data-i18n="payp.invoices">Doklady</h2>
+      </header>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" data-i18n="payp.invoice.number">Číslo dokladu</th>
+            <th scope="col" data-i18n="payp.date">Dátum</th>
+            <th scope="col" data-i18n="pay.amount">Suma</th>
+          </tr>
+        </thead>
+        <tbody id="invoices-body"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/account.js"></script>
+  <script src="js/account-payment.js"></script>
+</body>
+</html>

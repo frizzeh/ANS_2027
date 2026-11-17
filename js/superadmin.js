@@ -1,8 +1,6 @@
 /* Super admin: administrátori, nastavenia konferencie a poplatky.
    Stránka je dostupná len pre rolu superadmin. */
 
-const ADMIN_ROLE_ID = 2;
-
 const errorBox = $("#error");
 const notice = $("#notice");
 const conferenceForm = $("#conference-form");
@@ -36,27 +34,86 @@ async function run(action, body) {
 
 /* Vykreslenie
    -------------------------------------------------------------------------- */
+/** Názov roly v aktuálnom jazyku. */
+const roleName = (role) => (lang === "sk" ? role.name_sk : role.name_en);
+
+/** Roly, ktoré smie super admin prideľovať (rola superadmin sa v rozhraní nedáva ani neodoberá). */
+const assignableRoles = () => data.roles.filter((role) => role.code !== "superadmin");
+
+/** Roly používateľa (z tabuľky roles). */
+const rolesOf = (userId) => data.userRoles
+  .filter((item) => item.user_id === userId)
+  .map((item) => data.roles.find((role) => role.id === item.role_id))
+  .filter(Boolean);
+
+/** Štítok roly; pri bežných rolách s tlačidlom × na odobratie. */
+function roleChip(user, role) {
+  if (role.code === "superadmin") return h("li", { class: "chip chip--fixed" }, roleName(role));
+  return h("li", { class: "chip" },
+    roleName(role),
+    h("button", {
+      type: "button",
+      title: t("sup.role.remove"),
+      "aria-label": `${t("sup.role.remove")}: ${roleName(role)}`,
+      onclick: () => run("role.remove", { user_id: user.id, role: role.code }),
+    }, "×"));
+}
+
+/** Výber chýbajúcej roly a tlačidlo na jej pridanie (vráti prvky do riadku akcií). */
+function roleAdder(user) {
+  const held = new Set(rolesOf(user.id).map((role) => role.code));
+  const free = assignableRoles().filter((role) => !held.has(role.code));
+  if (!free.length) return [];
+
+  const select = h("select", { "aria-label": t("sup.role.choose") },
+    new Option(t("sup.role.choose"), ""),
+    ...free.map((role) => new Option(roleName(role), role.code)));
+  return [select, h("button", {
+    class: "button button--small button--ghost",
+    type: "button",
+    onclick: () => select.value && run("role.add", { user_id: user.id, role: select.value }),
+  }, t("sup.role.add"))];
+}
+
+/** Zamestnanci = všetci používatelia, ktorí majú aspoň jednu rolu. */
 function renderAdmins() {
-  const adminIds = data.userRoles.filter((item) => item.role_id === ADMIN_ROLE_ID).map((item) => item.user_id);
-  const rows = data.users.filter((user) => adminIds.includes(user.id)).map((user) =>
+  const staffIds = new Set(data.userRoles.map((item) => item.user_id));
+  const superadminIds = new Set(
+    data.userRoles.filter((item) => data.roles.find((role) => role.id === item.role_id)?.code === "superadmin").map((item) => item.user_id));
+
+  const rows = data.users.filter((user) => staffIds.has(user.id)).map((user) =>
     h("tr", {},
-      h("td", {}, user.first_name + " " + user.last_name),
+      h("td", {}, [user.title_before, user.first_name, user.last_name].filter(Boolean).join(" ")),
       h("td", {}, user.email),
+      h("td", {}, h("ul", { class: "chips" }, rolesOf(user.id).map((role) => roleChip(user, role)))),
       h("td", {}, h("span", { class: "badge" + (user.is_active ? " badge--ok" : "") },
         t(user.is_active ? "sup.active" : "sup.inactive"))),
-      h("td", {}, h("button", {
-        class: "button button--small button--ghost",
-        type: "button",
-        onclick: () => run("admin.set_active", { user_id: user.id, is_active: !user.is_active }),
-      }, t(user.is_active ? "sup.deactivate" : "sup.activate"))),
+      h("td", { class: "sup-actions" }, h("p", { class: "role-add" },
+        ...roleAdder(user),
+        superadminIds.has(user.id) ? "" : h("button", {
+          class: "button button--small button--ghost",
+          type: "button",
+          onclick: () => run("admin.set_active", { user_id: user.id, is_active: !user.is_active }),
+        }, t(user.is_active ? "sup.deactivate" : "sup.activate")))),
     ));
   $("#admins-body").replaceChildren(...rows);
+}
+
+/** Naplní výbery rolí vo formulároch (zachová aktuálny výber). */
+function renderRoleSelects() {
+  ["#new-role", "#existing-role"].forEach((selector) => {
+    const select = $(selector);
+    const previous = select.value;
+    select.replaceChildren(...assignableRoles().map((role) => new Option(roleName(role), role.code)));
+    if (previous) select.value = previous;
+    else if (selector === "#new-role") select.value = "organizer";
+  });
 }
 
 function renderCategories() {
   const rows = data.categories.map((category) => {
     const fee = h("input", { type: "number", min: "0", step: "0.01", value: category.fee, "aria-label": t("sup.cat.fee") });
-    const studentFee = h("input", { type: "number", min: "0", step: "0.01", value: category.student_fee, "aria-label": t("sup.cat.student") });
+    const studentFee = h("input", { type: "number", min: "0", step: "0.01", value: category.student_fee ?? "", "aria-label": t("sup.cat.student") });
     return h("tr", {},
       h("td", {}, t("cat." + category.code)),
       h("td", {}, fee),
@@ -87,13 +144,14 @@ function fillConference() {
 function render() {
   if (!data) return;
   renderAdmins();
+  renderRoleSelects();
   renderCategories();
 }
 
 async function refresh() {
-  const [users, userRoles, categories, conferences] = await Promise.all(
-    ["users", "user_roles", "participant_categories", "conferences"].map(listTable));
-  data = { users, userRoles, categories, conference: conferences[0] };
+  const [users, userRoles, roles, categories, conferences] = await Promise.all(
+    ["users", "user_roles", "roles", "participant_categories", "conferences"].map(listTable));
+  data = { users, userRoles, roles, categories, conference: conferences[0] };
   render();
   fillConference();
 }
@@ -108,8 +166,16 @@ $("#admin-form").addEventListener("submit", async (event) => {
     last_name: form.elements.lastName.value,
     email: form.elements.email.value,
     password: form.elements.password.value,
+    role: form.elements.role.value,
   });
   if (saved) form.reset();
+});
+
+$("#role-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const form = event.target;
+  const saved = await run("role.add", { email: form.elements.email.value, role: form.elements.role.value });
+  if (saved) form.elements.email.value = "";
 });
 
 conferenceForm.addEventListener("submit", (event) => {

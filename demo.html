@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.demo">Ukážky rozhraní – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand__logo">ANS</span>
+      ANS 2027
+    </a>
+
+    <ul class="lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+  </header>
+
+  <main class="page">
+
+    <header class="page__head">
+      <p class="eyebrow" data-i18n="demo.eyebrow">Demo bez databázy</p>
+      <h1 class="page__title" data-i18n="demo.title">Ukážky rozhraní</h1>
+      <p class="muted" data-i18n="demo.lead">Vyberte pohľad. Prihlásime vás ukážkovým účtom a otvoríme príslušnú časť systému. Zmeny sa ukladajú len v tomto prehliadači.</p>
+    </header>
+
+    <ul class="cards demo-views">
+      <li class="card">
+        <h2 data-i18n="demo.participant">Účet účastníka</h2>
+        <p class="muted" data-i18n="demo.participant.text">Prehľad registrácie, príspevky, platba a nastavenia. Prihlásený ako Ján Novák.</p>
+        <button class="button" type="button" data-demo-login="jan.novak@example.com" data-demo-target="ucet.html" data-i18n="demo.open">Otvoriť</button>
+      </li>
+      <li class="card">
+        <h2 data-i18n="demo.admin">Admin (organizátor)</h2>
+        <p class="muted" data-i18n="demo.admin.text">Účastníci, platby, príspevky, recenzie, program a e-maily. Prihlásená ako Lucia Horváthová.</p>
+        <button class="button" type="button" data-demo-login="organizator@ans-test.sk" data-demo-target="admin.html" data-i18n="demo.open">Otvoriť</button>
+      </li>
+      <li class="card">
+        <h2 data-i18n="demo.superadmin">Super admin</h2>
+        <p class="muted" data-i18n="demo.superadmin.text">Všetko ako admin plus administrátori, poplatky a nastavenia konferencie. Prihlásený ako Martin Kováč.</p>
+        <button class="button" type="button" data-demo-login="admin@ans-test.sk" data-demo-target="superadmin.html" data-i18n="demo.open">Otvoriť</button>
+      </li>
+      <li class="card">
+        <h2 data-i18n="demo.public">Verejná stránka</h2>
+        <p class="muted" data-i18n="demo.public.text">Úvodná stránka, registrácia a prihlásenie bez účtu.</p>
+        <a class="button" href="index.html" data-i18n="demo.open">Otvoriť</a>
+      </li>
+    </ul>
+
+    <p class="muted">
+      <span data-i18n="demo.password">Všetky ukážkové účty majú heslo „heslo“.</span>
+      <button class="link-button" type="button" id="demo-reset" data-i18n="demo.reset">Obnoviť dáta</button>
+    </p>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2027 ANS</p>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/demo-page.js"></script>
+</body>
+</html>

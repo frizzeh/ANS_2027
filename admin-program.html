@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="title.admin">Admin – ANS 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="app">
+
+  <nav class="sidebar" aria-label="Menu administrácie">
+    <a class="sidebar__brand" href="admin.html">ANS 2027</a>
+    <p class="sidebar__role" id="role-name"></p>
+
+    <ul class="sidebar__menu">
+      <li><a href="admin.html" data-i18n="side.overview">Prehľad</a></li>
+      <li><a href="admin-ucastnici.html" data-i18n="side.participants">Účastníci</a></li>
+      <li><a href="admin-platby.html" data-i18n="side.payments">Platby</a></li>
+      <li><a href="admin-prispevky.html" data-i18n="side.papers">Príspevky</a></li>
+      <li><a href="admin-recenzie.html" data-i18n="side.reviews">Recenzie</a></li>
+      <li><a href="admin-program.html" aria-current="page" data-i18n="side.program">Program</a></li>
+      <li><a href="admin-emaily.html" data-i18n="side.emails">E-maily</a></li>
+      <li><a href="admin-nastavenia.html" data-i18n="side.settings">Nastavenia</a></li>
+    </ul>
+
+    <ul class="lang sidebar__lang" aria-label="Jazyk / Language">
+      <li><button type="button" data-lang="sk">SK</button></li>
+      <li><button type="button" data-lang="en">EN</button></li>
+    </ul>
+
+    <a class="sidebar__link" href="superadmin.html" data-auth="superadmin" data-i18n="nav.superadmin" hidden>Super admin</a>
+    <a class="sidebar__link" href="index.html" data-i18n="side.website">Späť na web</a>
+    <button class="link-button sidebar__link" type="button" data-logout data-i18n="btn.logout">Odhlásiť sa</button>
+  </nav>
+
+  <main class="app__main" id="admin-main" hidden>
+    <header class="app__head">
+      <h1 data-i18n="side.program">Program</h1>
+    </header>
+
+    <p class="alert" id="error" hidden></p>
+
+    <section class="card table-card" aria-labelledby="program-title">
+      <header class="table-card__head">
+        <h2 id="program-title" data-i18n="prg.title">Program konferencie</h2>
+      </header>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" data-i18n="adm.col.title">Názov</th>
+            <th scope="col" data-i18n="prg.col.room">Miestnosť</th>
+            <th scope="col" data-i18n="prg.col.start">Začiatok</th>
+            <th scope="col" data-i18n="prg.col.end">Koniec</th>
+            <th scope="col" data-i18n="prg.col.symposium">Oblasť</th>
+            <th scope="col" data-i18n="adm.col.action">Akcia</th>
+          </tr>
+        </thead>
+        <tbody id="program-body"></tbody>
+      </table>
+      <p class="muted table-card__empty" id="program-empty" data-i18n="adm.none">Zatiaľ tu nič nie je.</p>
+      <form class="inline-form" id="program-form">
+        <label class="field">
+          <span data-i18n="adm.col.title">Názov</span>
+          <input type="text" name="title" required>
+        </label>
+        <label class="field">
+          <span data-i18n="prg.col.room">Miestnosť</span>
+          <input type="text" name="room">
+        </label>
+        <label class="field">
+          <span data-i18n="prg.col.start">Začiatok</span>
+          <input type="datetime-local" name="start">
+        </label>
+        <label class="field">
+          <span data-i18n="prg.col.end">Koniec</span>
+          <input type="datetime-local" name="end">
+        </label>
+        <label class="field">
+          <span data-i18n="prg.col.symposium">Oblasť</span>
+          <select name="symposium" id="symposium-select"></select>
+        </label>
+        <button class="button" type="submit" data-i18n="prg.add">Pridať bod programu</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script src="js/admin-program.js"></script>
+</body>
+</html>
